@@ -5,6 +5,6 @@ Version: 0.1
 Date: 2016-01-28
 Author: Eric Zhang Chen
 Maintainer: Eric Zhang Chen <chvlyl@gmail.com>
-Description: A zero-inflated beta random effect model for time series microbiome data
+Description: A zero-inflated beta random effect model for time series microbiome data.
 License: GPL-2
 LazyData: TRUE
