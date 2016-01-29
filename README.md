@@ -8,7 +8,7 @@ You can install our ZIBRE package from Github
 ```r
 install.packages("devtools")
 devtools::install_github("chvlyl/ZIBRE")
-library(ZIR)
+library(ZIBRE)
 ```
 
 ## Basic Usage
