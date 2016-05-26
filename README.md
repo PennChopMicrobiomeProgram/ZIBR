@@ -17,11 +17,11 @@ library(ZIBR)
 zibr(logistic.cov=logistic.cov,beta.cov=beta.cov,Y=Y,subject.ind=subject.ind,time.ind=time.ind)
 ```
 
-logistic.cov: covariates for the logistic component.  
-beta.cov: covariates for the beta component.  
-Y: the response variable (i.e the bacterial relative abundance)  
-subject.ind: the variable with subject IDs.   
-time.ind: the variable with time points.   
+- *logistic.cov*: covariates for the logistic component.  
+- *beta.cov*: covariates for the beta component.  
+- *Y*: the response variable (i.e the bacterial relative abundance)  
+- *subject.ind*: the variable with subject IDs.   
+- *time.ind*: the variable with time points.   
 
 ## Citation
 Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing longitudinal microbiome data. Bioinformatics. 
