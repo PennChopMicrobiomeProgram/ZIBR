@@ -23,6 +23,14 @@ zibr(logistic.cov=logistic.cov,beta.cov=beta.cov,Y=Y,subject.ind=subject.ind,tim
 - **subject.ind**: the variable with subject IDs.   
 - **time.ind**: the variable with time points.   
 
+The zibr function will return the following results:
+- **logistic.est.table**: the estimated coefficients for logistic component.  
+- **logistic.s1.est**: the estimated standard deviation for the random effect in the logistic component.  
+- **logistic.est.table**: the estimated coefficients for logistic component.  
+- **beta.s2.est**: the estimated standard deviation for the random effect in the beta component.  
+- **beta.v.est**: the estiamted dispersion parameter in the beta component.  
+
+
 ## Examples
 
 
