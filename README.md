@@ -9,9 +9,9 @@ The details of the statistical model are as follows:
 The ZIBR model combines two regression models, logistic regression and beta regression. Each regression has random effects to account for correlations acorss time points. We call these two regressions in ZIBR model as logistic component and beta component. These two components model two different aspects of the data. The logistic component models presence/absence of the microbe and Beta component to model non-zero microbial abundance.
 
 Accordingly, we can test three biologically relevant null hypotheses:  
-1. ** H0: α_j = 0 ** the covariates are associated with the bacterial taxon by affecting its presence or absence. This is to test the coefficients in the logistic component;  
-2. ** H0: β_j = 0 **  the taxon is associated with the covariates by showing different abundances. This is to test the coefficients in the beta component;  
-3. ** H0: α_j = 0 and β_j = 0 for each covariate X_j and Z_j ** the covariates affect the taxon both in terms of presence/absence and its non-zero abundance. This is to joinly test the coefficients in both logistic and beta components. 
+- ** H0: α_j = 0 ** the covariates are associated with the bacterial taxon by affecting its presence or absence. This is to test the coefficients in the logistic component;  
+- ** H0: β_j = 0 **  the taxon is associated with the covariates by showing different abundances. This is to test the coefficients in the beta component;  
+- ** H0: α_j = 0 and β_j = 0 for each covariate X_j and Z_j ** the covariates affect the taxon both in terms of presence/absence and its non-zero abundance. This is to joinly test the coefficients in both logistic and beta components. 
 
 ## Installation
 You can install our ZIBR package from Github
@@ -67,7 +67,6 @@ zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
     subject.ind = sim$subject.ind,time.ind = sim$time.ind)
 zibr.fit
 ```
-
 
 
 ## Citation
