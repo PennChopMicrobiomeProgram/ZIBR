@@ -3,7 +3,7 @@
 #' @param logistic.cov the covariates in logistic component
 #' @param beta.cov the covariates in beta component
 #' @param Y the response variable in the regression model
-#' @param subject.ind the variable for subjects
+#' @param subject.ind the variable for subject IDs
 #' @param time.ind the variable for time points
 #' @param quad.n Gaussian quadrature points
 #' @param verbose print the fitting process
