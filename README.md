@@ -35,11 +35,13 @@ The zibr function will return the following results:
 
 
 ## Examples
-The following function will simulate some data according to the zero-inflated beta random effect model. Since we only specify the covariates in the logistic component (X), the function will also use those covariates in the beta component (i.e set Z=X).
+The following function will simulate some data according to the zero-inflated beta random effect model. We specify the covariates in the logistic component (X) and covariates in the beta component to be the same (i.e set Z=X).
+
 ```r
 sim <- simulate_zero_inflated_beta_random_effect_data(
     subject.n=100,time.n=5,
     X = as.matrix(c(rep(0,50*5),rep(1,50*5))),
+    Z = as.matrix(c(rep(0,50*5),rep(1,50*5))),
     alpha = as.matrix(c(-0.5,1)),
     beta = as.matrix(c(-0.5,0.5)),
     s1 = 1,s2 = 0.8,
@@ -47,6 +49,10 @@ sim <- simulate_zero_inflated_beta_random_effect_data(
     sim.seed=100)
 ```
 
+The simulation function returns the the bacterial abundance (Y) simulated according to the above parameter settings. This function also returns the other variables such as X, Z, alpha, beta etc. that we just specified. It also returns two variables subject.ind and time.ind, which are subject IDs and time points for each subject.
+
+
+We can run the zibr function to fit the zero-inflated beta random effect model on the simulated data.
 ```r
 zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
     subject.ind = sim$subject.ind,time.ind = sim$time.ind)
