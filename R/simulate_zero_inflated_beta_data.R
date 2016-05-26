@@ -1,3 +1,37 @@
+#' Simulate data according to zero-inflated beta random effects model
+#'
+#' @param subject.n number of subjects
+#' @param time.n number of time points for each subject
+#' @param v the dispersion parameter in beta component
+#' @param alpha the coefficients in logistic component
+#' @param beta the coefficients in beta component
+#' @param X the covariates in logistic component
+#' @param Z the covariates in beta component
+#' @param s1 the stardard deviation of random effect in logistic component
+#' @param s2 the stardard deviation of random effect in beta component
+#' @param sim.seed the random seed
+#' @return Y the bacterial abundance generated from the model
+#' @return X the covariates in logistic component
+#' @return Z the covariates in beta component
+#' @return alpha the coefficients in logistic component
+#' @return beta the coefficients in beta component
+#' @return s1 the stardard deviation of random effect in logistic component
+#' @return s2 the stardard deviation of random effect in beta component
+#' @return subject.ind the IDs for each subject
+#' @return time.ind time points
+#' @export
+#' @examples
+#' \dontrun{
+#' simulate_zero_inflated_beta_random_effect_data(
+#'    subject.n=100,time.n=5,
+#'    X = as.matrix(c(rep(0,50*5),rep(1,50*5))),
+#'    alpha = as.matrix(c(-0.5,1)),
+#'    beta = as.matrix(c(-0.5,0.5)),
+#'    s1 = 1,s2 = 0.8,
+#'    v = 5,
+#'    sim.seed=100)
+#' }
+
 
 simulate_zero_inflated_beta_random_effect_data <- function(
                                subject.n=50, time.n=5, v=2,
@@ -21,8 +55,8 @@ simulate_zero_inflated_beta_random_effect_data <- function(
   if (length(NA)==1 & any(is.na(Z))){
     Z <- X
   }
-  
-  
+
+
   set.seed(sim.seed*5000+1)
   b <- as.matrix(rnorm(subject.n,mean=0,sd=s1))
   b.rep <- as.matrix(as.vector(matrix(b,nrow=time.n,ncol=length(b),byrow=TRUE)))
