@@ -33,7 +33,14 @@ zibr = function(logistic.cov=logistic.cov,
     stop("The dimensions of covariates and repsonse variable are not correct")
   }
   #### check if time.ind are the same for each subject.ind
-  fit_zero_inflated_beta_random_effect(X=logistic.cov,Z=beta.cov,Y=Y,
+  fit = fit_zero_inflated_beta_random_effect(X=logistic.cov,Z=beta.cov,Y=Y,
  subject.ind=subject.ind,time.ind=time.ind)
+
+  return(list(logistic.est.table=fit$logistic.est.table,
+              logistic.s1.est=fit$logistic.s1.est,
+              beta.est.table=fit$beta.est.table,
+              beta.s2.est=fit$beta.s2.est,
+              beta.v.est=fit$beta.v.est,
+              overall.test.p=fit$overall.test.p))
 
 }
