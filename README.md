@@ -17,11 +17,12 @@ library(ZIBR)
 zibr(logistic.cov=logistic.cov,beta.cov=beta.cov,Y=Y,subject.ind=subject.ind,time.ind=time.ind)
 ```
 
-- **logistic.cov**: covariates for the logistic component.  
-- **beta.cov**: covariates for the beta component.  
+- **logistic.cov**: covariates for the logistic component. Rows: samples. Columns: covariates.  
+- **beta.cov**: covariates for the beta component. Rows: samples. Columns: covariates.  
 - **Y**: the response variable (i.e the bacterial relative abundance). It is a vector with values in [0,1).  
 - **subject.ind**: the variable with subject IDs.   
 - **time.ind**: the variable with time points.   
+The ordering of the samples in the above matrix or vectors must be consistent. 
 
 The zibr function will return the following results:
 - **logistic.est.table**: the estimated coefficients for logistic component.  
@@ -45,8 +46,9 @@ sim <- simulate_zero_inflated_beta_random_effect_data(
 ```
 
 ```r
-zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
+zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
     subject.ind = sim$subject.ind,time.ind = sim$time.ind)
+zibr.fit
 ```
 
 
