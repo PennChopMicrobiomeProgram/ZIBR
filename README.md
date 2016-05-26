@@ -9,9 +9,9 @@ The details of the statistical model are as follows:
 The ZIBR model combines two regression models, logistic regression and beta regression. Each regression has random effects to account for correlations acorss time points. We call these two regressions in ZIBR model as logistic component and beta component. These two components model two different aspects of the data. The logistic component models presence/absence of the microbe and Beta component to model non-zero microbial abundance.
 
 Accordingly, we can test three biologically relevant null hypotheses:  
-1. **H0: α_j = 0** the covariates are associated with the bacterial taxon by affecting its presence or absence. This is to test the coefficients in the logistic component;  
-2. **H0: β_j = 0**  the taxon is associated with the covariates by showing different abundances. This is to test the coefficients in the beta component;  
-3. ** H0: α_j = 0 and β_j = 0 for each covariate X_j and Z_j** the covariates affect the taxon both in terms of presence/absence and its non-zero abundance. This is to joinly test the coefficients in the logistic and beta component. 
+1. ** H0: α_j = 0 ** the covariates are associated with the bacterial taxon by affecting its presence or absence. This is to test the coefficients in the logistic component;  
+2. ** H0: β_j = 0 **  the taxon is associated with the covariates by showing different abundances. This is to test the coefficients in the beta component;  
+3. ** H0: α_j = 0 and β_j = 0 for each covariate X_j and Z_j ** the covariates affect the taxon both in terms of presence/absence and its non-zero abundance. This is to joinly test the coefficients in both logistic and beta components. 
 
 ## Installation
 You can install our ZIBR package from Github
@@ -38,10 +38,10 @@ The ordering of the samples in the above matrix or vectors must be consistent.
 The zibr function will return the following results:
 - **logistic.est.table**: the estimated coefficients for logistic component.  
 - **logistic.s1.est**: the estimated standard deviation for the random effect in the logistic component.  
-- **logistic.est.table**: the estimated coefficients for logistic component.  
+- **beta.est.table**: the estimated coefficients for logistic component.  
 - **beta.s2.est**: the estimated standard deviation for the random effect in the beta component.  
 - **beta.v.est**: the estiamted dispersion parameter in the beta component.  
-
+- **joint.p**: the pvalues for jointly testing each covariate in both logistic and beta component.  
 
 ## Examples
 The following function will simulate some data according to the zero-inflated beta random effect model. We specify the covariates in the logistic component (X) and covariates in the beta component to be the same (i.e set Z=X).

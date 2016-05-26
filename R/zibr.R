@@ -7,11 +7,29 @@
 #' @param time.ind the variable for time points
 #' @param quad.n Gaussian quadrature points
 #' @param verbose print the fitting process
-#' @return X,Y,Z
+#' @return logistic.est.table the estimated coefficients for logistic component.
+#' @return logistic.s1.est the estimated standard deviation for the random effect in the logistic component.
+#' @return beta.est.table the estimated coefficients for logistic component.
+#' @return beta.s2.est the estimated standard deviation for the random effect in the beta component.
+#' @return beta.v.est the estiamted dispersion parameter in the beta component.
+#' @return joint.p  the pvalues for jointly testing each covariate in both logistic and beta component.
 #' @export
 #' @examples
 #' \dontrun{
-#' zibr(logistic.cov=logistic.cov,beta.cov=beta.cov,Y=Y,subject.ind=subject.ind,time.ind=time.ind)
+#' ## simulate some data
+#' sim <- simulate_zero_inflated_beta_random_effect_data(
+#' subject.n=100,time.n=5,
+#' X = as.matrix(c(rep(0,50*5),rep(1,50*5))),
+#' Z = as.matrix(c(rep(0,50*5),rep(1,50*5))),
+#' alpha = as.matrix(c(-0.5,1)),
+#' beta = as.matrix(c(-0.5,0.5)),
+#' s1 = 1,s2 = 0.8,
+#' v = 5,
+#' sim.seed=100)
+#' ## run zibr on the simulated data
+#' zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
+#'                  subject.ind = sim$subject.ind,time.ind = sim$time.ind)
+#' zibr.fit
 #' }
 
 
@@ -41,6 +59,6 @@ zibr = function(logistic.cov=logistic.cov,
               beta.est.table=fit$beta.est.table,
               beta.s2.est=fit$beta.s2.est,
               beta.v.est=fit$beta.v.est,
-              overall.test.p=fit$overall.test.p))
+              joint.p=fit$joint.p))
 
 }
