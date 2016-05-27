@@ -6,12 +6,12 @@ The longitudinal microbiome compositional data are highly skewed, bounded in [0,
 The details of the statistical model are as follows:
 <img src="inst/image/zibr.png" width="600" align="center">
 
-The ZIBR model combines the logistic regression and beta regression in one model. Each regression part includes random effects to account for correlations acorss time points. We call these two regressions in ZIBR model as logistic component and beta component. These two components model two different aspects of the data. The logistic component models presence/absence of the microbe and Beta component models non-zero microbial abundance.
+The ZIBR model combines the logistic regression and Beta regression in one model. Each regression part includes random effects to account for correlations acorss time points. We call these two regressions in ZIBR model as logistic component and Beta component. These two components model two different aspects of the data. The logistic component models presence/absence of the microbe and Beta component models non-zero microbial abundance.
 
 Accordingly, we can test three biologically relevant null hypotheses:  
 - ** H0: α_j = 0 ** This is to test the coefficients in the logistic component, if the covariates are associated with the bacterial taxon by affecting its presence or absence;  
-- ** H0: β_j = 0 **  This is to test the coefficients in the beta component, if the taxon is associated with the covariates by showing different abundances;  
-- ** H0: α_j = 0 and β_j = 0 for each covariate X_j and Z_j ** This is to joinly test the coefficients in both logistic and beta components, if the covariates affect the taxon both in terms of presence/absence and its non-zero abundance.  
+- ** H0: β_j = 0 **  This is to test the coefficients in the Beta component, if the taxon is associated with the covariates by showing different abundances;  
+- ** H0: α_j = 0 and β_j = 0 for each covariate X_j and Z_j ** This is to joinly test the coefficients in both logistic and Beta components, if the covariates affect the taxon both in terms of presence/absence and its non-zero abundance.  
 
 ## Installation
 You can install our ZIBR package from Github
@@ -28,7 +28,7 @@ zibr(logistic.cov=logistic.cov,beta.cov=beta.cov,Y=Y,subject.ind=subject.ind,tim
 ```
 
 - **logistic.cov**: covariates for the logistic component. Rows: samples. Columns: covariates.  
-- **beta.cov**: covariates for the beta component. Rows: samples. Columns: covariates.  
+- **beta.cov**: covariates for the Beta component. Rows: samples. Columns: covariates.  
 - **Y**: the response variable (i.e the bacterial relative abundance). It is a vector with values in [0,1).  
 - **subject.ind**: the variable with subject IDs.   
 - **time.ind**: the variable with time points.   
@@ -38,13 +38,13 @@ The ordering of the samples in the above matrix or vectors must be consistent.
 The zibr function will return the following results:
 - **logistic.est.table**: the estimated coefficients for logistic component.  
 - **logistic.s1.est**: the estimated standard deviation for the random effect in the logistic component.  
-- **beta.est.table**: the estimated coefficients for logistic component.  
-- **beta.s2.est**: the estimated standard deviation for the random effect in the beta component.  
-- **beta.v.est**: the estiamted dispersion parameter in the beta component.  
-- **joint.p**: the pvalues for jointly testing each covariate in both logistic and beta component.  
+- **beta.est.table**: the estimated coefficients for Beta component.  
+- **beta.s2.est**: the estimated standard deviation for the random effect in the Beta component.  
+- **beta.v.est**: the estiamted dispersion parameter in the Beta component.  
+- **joint.p**: the pvalues for jointly testing each covariate in both logistic and Beta component.  
 
 ## Examples
-The following function will simulate some data according to the zero-inflated beta random effect model. We specify the covariates in the logistic component (X) and covariates in the beta component (Z) to be the same (i.e set Z=X).
+The following function will simulate some data according to the zero-inflated beta random effect model. We specify the covariates in the logistic component (X) and covariates in the Beta component (Z) to be the same (i.e set Z=X).
 
 ```r
 sim <- simulate_zero_inflated_beta_random_effect_data(
@@ -68,7 +68,8 @@ zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
 zibr.fit
 ```
 
-
+The current model can not handle missing data. That is, each subject must have the same number of time points. If any time point is missing in your data, you can (1) remove some other time points so that all subject have the same time points (2) impute the missing data, for example, use the mean or median value from other subjects at the same time point in the same covariate group to replace the missing value. I'm currently working on the missing data problem and hope that our model can handle missing data soon.
+ 
 ## Citation
 Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing longitudinal microbiome data. Bioinformatics. [Link](http://bioinformatics.oxfordjournals.org/content/early/2016/05/14/bioinformatics.btw308.short?rss=1)
 
