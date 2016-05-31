@@ -70,6 +70,13 @@ zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
 zibr.fit
 ```
 
+If we use the same covariates for logistic and beta components, ZIBR can jointly test the covariate in both components. In the following example, we use the same covariate X in both components.
+```r
+zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$X, Y = sim$Y,
+    subject.ind = sim$subject.ind,time.ind = sim$time.ind)
+zibr.fit
+```
+
 #### Real data  
 Let's try anohter example on the real data. I will use a dataset from a longitudinal human microbiome study containing the bacterial abundance and clinical information from [Lewis and Chen et al.](http://www.cell.com/cell-host-microbe/references/S1931-3128(15)00377-7). I only include the abundance from one genus.   
 
