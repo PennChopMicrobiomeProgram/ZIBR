@@ -9,9 +9,9 @@ The details of the statistical model are as follows:
 The ZIBR model combines the logistic regression and Beta regression in one model. Each regression part includes random effects to account for correlations acorss time points. We call these two regressions in ZIBR model as logistic component and Beta component. These two components model two different aspects of the data. The logistic component models presence/absence of the microbe and Beta component models non-zero microbial abundance.
 
 Accordingly, we can test three biologically relevant null hypotheses:  
-- ** H0: α_j = 0 ** This is to test the coefficients in the logistic component, if the covariates are associated with the bacterial taxon by affecting its presence or absence;  
-- ** H0: β_j = 0 **  This is to test the coefficients in the Beta component, if the taxon is associated with the covariates by showing different abundances;  
-- ** H0: α_j = 0 and β_j = 0 for each covariate X_j and Z_j ** This is to joinly test the coefficients in both logistic and Beta components, if the covariates affect the taxon both in terms of presence/absence and its non-zero abundance.  
+- H0: α_j = 0.  This is to test the coefficients in the logistic component, if the covariates are associated with the bacterial taxon by affecting its presence or absence;  
+- H0: β_j = 0.  This is to test the coefficients in the Beta component, if the taxon is associated with the covariates by showing different abundances;  
+- H0: α_j = 0 and β_j = 0 for each covariate X_j and Z_j. This is to joinly test the coefficients in both logistic and Beta components, if the covariates affect the taxon both in terms of presence/absence and its non-zero abundance.  
 
 ## Installation
 You can install our ZIBR package from Github
@@ -44,6 +44,8 @@ The zibr function will return the following results:
 - **joint.p**: the pvalues for jointly testing each covariate in both logistic and Beta component.  
 
 ## Examples
+
+#### Simulated data  
 The following function will simulate some data according to the zero-inflated beta random effect model. We specify the covariates in the logistic component (X) and covariates in the Beta component (Z) to be the same (i.e set Z=X).
 
 ```r
@@ -68,33 +70,53 @@ zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
 zibr.fit
 ```
 
-Let's try anohter example on the real data. The data are adapted from [Lewis and Chen et al.](http://www.cell.com/cell-host-microbe/references/S1931-3128(15)00377-7)
+#### Real data  
+Let's try anohter example on the real data. I will use a dataset from a longitudinal human microbiome study containing the bacterial abundance and clinical information from [Lewis and Chen et al.](http://www.cell.com/cell-host-microbe/references/S1931-3128(15)00377-7). I only include the abundance from one genus.   
+
+Type ```ibd.data```.
 ```r
      Sample Subject Time Treatment    Abundance
-1   5001-01    5001    1         0  0.000000000
-2   5001-02    5001    2         0  0.000000000
-3   5001-03    5001    3         0  0.000000000
-4   5001-04    5001    4         0  0.000000000
-5   5002-01    5002    1         0  0.396176386
-6   5002-02    5002    2         0  1.008613484
-7   5002-03    5002    3         0  0.000000000
-8   5002-04    5002    4         0  0.000000000
-9   5003-01    5003    1         0  0.254508313
-10  5003-02    5003    2         0  0.690109568
-11  5003-03    5003    3         0  0.030381396
-12  5003-04    5003    4         0  1.739832035
-13  5006-01    5006    1         0  0.205254908
-14  5006-02    5006    2         0  0.046362354
-15  5006-03    5006    3         0  0.034034909
-16  5006-04    5006    4         0  0.284075591
-17  5007-01    5007    1         0  0.163421525
-18  5007-02    5007    2         0  0.106101341
-19  5007-03    5007    3         0  0.005522727
-20  5007-04    5007    4         0 19.863684194
-
+1   5001-01    5001    1         0 0.000000e+00
+2   5001-02    5001    2         0 0.000000e+00
+3   5001-03    5001    3         0 0.000000e+00
+4   5001-04    5001    4         0 0.000000e+00
+5   5002-01    5002    1         0 3.961764e-03
+6   5002-02    5002    2         0 1.008613e-02
+7   5002-03    5002    3         0 0.000000e+00
+8   5002-04    5002    4         0 0.000000e+00
+9   5003-01    5003    1         0 2.545083e-03
+10  5003-02    5003    2         0 6.901096e-03
+11  5003-03    5003    3         0 3.038140e-04
+12  5003-04    5003    4         0 1.739832e-02
+13  5006-01    5006    1         0 2.052549e-03
+14  5006-02    5006    2         0 4.636235e-04
+15  5006-03    5006    3         0 3.403491e-04
+16  5006-04    5006    4         0 2.840756e-03
+17  5007-01    5007    1         0 1.634215e-03
+18  5007-02    5007    2         0 1.061013e-03
+19  5007-03    5007    3         0 5.522727e-05
+20  5007-04    5007    4         0 1.986368e-01
+...
+...
 ```
 
+Note that each subject has four time points. In the Treatment column, 0 is for antiTNF treatment and 1 is for EEN treatment. Abundance column is the relative abundance for Eubacterium. The abudance is in the range of [0,1).  
+
+
 The current model can not handle missing data. That is, each subject must have the same number of time points. If any time point is missing in your data, you can (1) remove some other time points so that all subject have the same time points (2) impute the missing data, for example, use the mean or median value from other subjects at the same time point in the same covariate group to replace the missing value. I'm currently working on the missing data problem and hope that our model can handle missing data soon.
+
+We can run the zibr function to the real data. Here, I'm interested in comparing the two treatments and use treatment as the only covariate in both logistic and beta component. Depending on the scientific questions you are interested in, you can also include time and treament-time interaction in the covariates. 
+
+```r
+zibr.fit <- zibr(logistic.cov = as.matrix(ibd.data$Treatment), 
+    beta.cov = as.matrix(ibd.data$Treatment), 
+    Y = ibd.data$Abundance, subject.ind = ibd.data$Subject,
+    time.ind = ibd.data$Time)
+zibr.fit
+```
+
+Neither of the logsitic or beta component show significant pvalues. This indicates the abundance of this genus is not different between the two treatments, considering all time points.
+
  
 ## Citation
 Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing longitudinal microbiome data. Bioinformatics. [Link](http://bioinformatics.oxfordjournals.org/content/early/2016/05/14/bioinformatics.btw308.short?rss=1)
