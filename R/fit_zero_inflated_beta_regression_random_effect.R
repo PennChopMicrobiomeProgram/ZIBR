@@ -43,6 +43,12 @@ fit_zero_inflated_beta_random_effect = function(X=X,Z=Z,Y=Y,
   X <- as.matrix(X)
   Z <- as.matrix(Z)
   Y <- as.matrix(Y)
+  if(is.null(colnames(X))){
+    colnames(X) <- paste('var',1:ncol(X),sep='')
+  }
+  if(is.null(colnames(Z))){
+    colnames(Z) <- paste('var',1:ncol(Z),sep='')
+  }
   X.aug <- cbind(intersept = 1, X)
   Z.aug <- cbind(intersept = 1, Z)
   #############

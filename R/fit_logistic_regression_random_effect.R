@@ -39,6 +39,9 @@ fit_logistic_random_effect = function(X=X,Y=Y,
   ######
   X <- as.matrix(X)
   Y <- as.matrix(Y)
+  if(is.null(colnames(X))){
+    colnames(X) <- paste('var',1:ncol(X),sep='')
+  }
   X.aug <- cbind(intersept = 1, X)
   ######
   est.table <- matrix(NA,ncol=2,nrow=ncol(X.aug),

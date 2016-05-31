@@ -50,9 +50,11 @@ zibr = function(logistic.cov=logistic.cov,
   if(nrow(logistic.cov) != nrow(Y) | nrow(beta.cov) != nrow(Y) ){
     stop("The dimensions of covariates and repsonse variable are not correct")
   }
+  #### if the colnames are the same, jointly test the two component
+  if (identical(colnames(logistic.cov),colnames(beta.cov))){joint.test <- TRUE}else{joint.test <- FALSE}
   #### check if time.ind are the same for each subject.ind
   fit = fit_zero_inflated_beta_random_effect(X=logistic.cov,Z=beta.cov,Y=Y,
- subject.ind=subject.ind,time.ind=time.ind)
+ subject.ind=subject.ind,time.ind=time.ind,joint.test=joint.test)
 
   return(list(logistic.est.table=fit$logistic.est.table,
               logistic.s1.est=fit$logistic.s1.est,

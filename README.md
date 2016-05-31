@@ -108,8 +108,8 @@ The current model can not handle missing data. That is, each subject must have t
 We can run the zibr function to the real data. Here, I'm interested in comparing the two treatments and use treatment as the only covariate in both logistic and beta component. Depending on the scientific questions you are interested in, you can also include time and treament-time interaction in the covariates. 
 
 ```r
-zibr.fit <- zibr(logistic.cov = as.matrix(ibd.data$Treatment), 
-    beta.cov = as.matrix(ibd.data$Treatment), 
+zibr.fit <- zibr(logistic.cov = data.frame(Treatment=ibd.data$Treatment), 
+    beta.cov = data.frame(Treatment=ibd.data$Treatment), 
     Y = ibd.data$Abundance, subject.ind = ibd.data$Subject,
     time.ind = ibd.data$Time)
 zibr.fit
@@ -131,5 +131,4 @@ I will fix those problems soon:
 ## Updates
 <!---
 variable name is missing in beta.est.table
-real data example
 -->

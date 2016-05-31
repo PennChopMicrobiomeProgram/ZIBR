@@ -13,7 +13,7 @@ cal_beta_loglik = function(para,Z.aug,Y,subject.n,time.n,
   beta[Z.test.coeff.index]  <- 0 ## initialized as 0
   beta[!Z.test.coeff.index] <- para[-(1:2)][1:sum(!Z.test.coeff.index)]
   beta <- as.matrix(beta)
-  
+
   u <- 1 / (1 + exp(-(Z.aug %*% beta[,rep(1,quad.n)] + gh.nodes * s2 * sqrt(2))))
   #### replace Y==0 with NA, so don't use them in the likelihood calculation
   #Y.tem[Y == 0] <- NA
@@ -40,6 +40,9 @@ fit_beta_random_effect = function(Z=Z,Y=Y,
   ######
   Z <- as.matrix(Z)
   Y <- as.matrix(Y)
+  if(is.null(colnames(Z))){
+    colnames(Z) <- paste('var',1:ncol(Z),sep='')
+  }
   Z.aug <- cbind(intersept = 1, Z)
   ######
   est.table <- matrix(NA,ncol=2,nrow=ncol(Z.aug),
