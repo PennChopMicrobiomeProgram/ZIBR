@@ -68,6 +68,32 @@ zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
 zibr.fit
 ```
 
+Let's try anohter example on the real data. The data are adapted from [Lewis and Chen et al.](http://www.cell.com/cell-host-microbe/references/S1931-3128(15)00377-7)
+```r
+     Sample Subject Time Treatment    Abundance
+1   5001-01    5001    1         0  0.000000000
+2   5001-02    5001    2         0  0.000000000
+3   5001-03    5001    3         0  0.000000000
+4   5001-04    5001    4         0  0.000000000
+5   5002-01    5002    1         0  0.396176386
+6   5002-02    5002    2         0  1.008613484
+7   5002-03    5002    3         0  0.000000000
+8   5002-04    5002    4         0  0.000000000
+9   5003-01    5003    1         0  0.254508313
+10  5003-02    5003    2         0  0.690109568
+11  5003-03    5003    3         0  0.030381396
+12  5003-04    5003    4         0  1.739832035
+13  5006-01    5006    1         0  0.205254908
+14  5006-02    5006    2         0  0.046362354
+15  5006-03    5006    3         0  0.034034909
+16  5006-04    5006    4         0  0.284075591
+17  5007-01    5007    1         0  0.163421525
+18  5007-02    5007    2         0  0.106101341
+19  5007-03    5007    3         0  0.005522727
+20  5007-04    5007    4         0 19.863684194
+
+```
+
 The current model can not handle missing data. That is, each subject must have the same number of time points. If any time point is missing in your data, you can (1) remove some other time points so that all subject have the same time points (2) impute the missing data, for example, use the mean or median value from other subjects at the same time point in the same covariate group to replace the missing value. I'm currently working on the missing data problem and hope that our model can handle missing data soon.
  
 ## Citation
