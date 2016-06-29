@@ -51,7 +51,7 @@ zibr = function(logistic.cov=logistic.cov,
     stop("The dimensions of covariates and repsonse variable are not correct")
   }
   #### check how many zeros in Y
-  if(sum(Y>0)/length(Y)>0.9){warning("Only few zeros in the abundance data. The logistic component may be not accurate.")}
+  if(sum(Y>0)/length(Y)>0.9){warning("Too few zeros in the abundance data. The logistic component may be not accurate.")}
   if(sum(Y>0)/length(Y)<0.1){warning("Too many zeros in the abundance data. The beta component may be not accurate.")}
   #### if the colnames are the same, jointly test the two component
   if (identical(colnames(logistic.cov),colnames(beta.cov))){joint.test <- TRUE}else{joint.test <- FALSE}
