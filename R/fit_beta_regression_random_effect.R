@@ -13,7 +13,6 @@ cal_beta_loglik = function(para,Z.aug,Y,subject.n,time.n,
   beta[Z.test.coeff.index]  <- 0 ## initialized as 0
   beta[!Z.test.coeff.index] <- para[-(1:2)][1:sum(!Z.test.coeff.index)]
   beta <- as.matrix(beta)
-
   u <- 1 / (1 + exp(-(Z.aug %*% beta[,rep(1,quad.n)] + gh.nodes * s2 * sqrt(2))))
   #### replace Y==0 with NA, so don't use them in the likelihood calculation
   #Y.tem[Y == 0] <- NA
@@ -21,7 +20,14 @@ cal_beta_loglik = function(para,Z.aug,Y,subject.n,time.n,
   #### log likelihood
   #### first calculate the loglikelihood for the ith sbuject
   #log.i <- log(gamma(v)/(gamma(u*v)*gamma((1-u)*v))*Y^(u*v-1)*(1-Y)^((1-u)*v-1))
-  log.i <- lgamma(v)-lgamma(u*v)-lgamma((1-u)*v) + (u*v-1)*log(Y)+((1-u)*v-1)*log(1-Y)
+  suppressWarnings(
+    log.i <- lgamma(v)-lgamma(u*v)-lgamma((1-u)*v) + (u*v-1)*log(Y)+((1-u)*v-1)*log(1-Y)
+  )
+  #######
+  ## u -> 1 will cause warnings. lgamma((1-u)*v) = Inf.
+  ## next line will hanle this Inf problem.
+  #######
+  #browser()
   #### logY==0 -> infinite, we want to exclude Y==0 in the likelihood calculation
   #### replace with infinite with 0, it will be ignored, e^0*e^log(p2)= p2
   log.i[is.infinite(log.i)] <- 0
