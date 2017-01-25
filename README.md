@@ -209,7 +209,7 @@ reg.cov.t234 <- data.frame(
 spe.all <- colnames(taxa.data)
 p.species.list.zibr <- list()
 for (spe in spe.all){
-  spe = 'g__Collinsella'
+  #spe = 'g__Collinsella'
   ###### create covariates
   X <- data.frame(
     Baseline=taxa.data[reg.cov.t234$baseline.sample, spe]/100,
@@ -242,7 +242,7 @@ for (spe in spe.all){
     p.species.list.zibr[[spe]] <- est$joint.p
     
   }
-  break
+  #break
 }
 
 
