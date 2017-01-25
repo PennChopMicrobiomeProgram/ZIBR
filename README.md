@@ -282,13 +282,14 @@ setdiff(p.species.lme.adj[p.species.zibr.adj$Time<0.05,'Species'],
 Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing longitudinal microbiome data. Bioinformatics. [Link](http://bioinformatics.oxfordjournals.org/content/early/2016/05/14/bioinformatics.btw308.short?rss=1)
 
 ## Contact
-Feel free to contact me by chvlyl AT gmail.com
+Feel free to contact me (Eric Z. Chen) by chvlyl AT gmail.com
 
 ## Problems 
 I will fix those problems soon:  
 - ~~ Sometimes, the rownames (variable names) are missing in the logistic.est.table and beta.est.table.~~ 
 
 ## Updates
+- Add likelihood to the output.
 <!---
 variable name is missing in beta.est.table
 -->

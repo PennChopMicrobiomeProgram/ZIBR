@@ -12,7 +12,7 @@
 #' @return beta.est.table the estimated coefficients for logistic component.
 #' @return beta.s2.est the estimated standard deviation for the random effect in the beta component.
 #' @return beta.v.est the estiamted dispersion parameter in the beta component.
-#' @return likelihood  the likelihood of fitting zibr model on the data.
+#' @return loglikelihood  the log likelihood of fitting zibr model on the data.
 #' @return joint.p  the pvalues for jointly testing each covariate in both logistic and beta component.
 #' @export
 #' @examples
@@ -70,7 +70,7 @@ zibr = function(logistic.cov=logistic.cov,
               beta.est.table=fit$beta.est.table,
               beta.s2.est=fit$beta.s2.est,
               beta.v.est=fit$beta.v.est,
-              likelihood = fit$likelihood,
+              loglikelihood = fit$loglikelihood,
               joint.p=fit$joint.p))
 
 }
