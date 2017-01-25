@@ -126,6 +126,7 @@ fit_zero_inflated_beta_random_effect = function(X=X,Z=Z,Y=Y,
                 beta.est.table=beta.fit$est.table,
                 beta.s2.est=beta.fit$s2.est,
                 beta.v.est=beta.fit$v.est,
+                likelihood = NA,
                 joint.p=NA))
   }
   if(joint.test & component.wise.test){
@@ -134,6 +135,7 @@ fit_zero_inflated_beta_random_effect = function(X=X,Z=Z,Y=Y,
                 beta.est.table=beta.fit$est.table,
                 beta.s2.est=beta.fit$s2.est,
                 beta.v.est=beta.fit$v.est,
+                likelihood = opt.H1$objective,
                 joint.p=joint.p))
   }
   if(joint.test & !component.wise.test){
@@ -142,6 +144,7 @@ fit_zero_inflated_beta_random_effect = function(X=X,Z=Z,Y=Y,
                 beta.est.table=NA,
                 beta.s2.est=NA,
                 beta.v.est=NA,
+                likelihood = opt.H1$objective,
                 joint.p=joint.p))
   }
 

@@ -12,6 +12,7 @@
 #' @return beta.est.table the estimated coefficients for logistic component.
 #' @return beta.s2.est the estimated standard deviation for the random effect in the beta component.
 #' @return beta.v.est the estiamted dispersion parameter in the beta component.
+#' @return likelihood  the likelihood of fitting zibr model on the data.
 #' @return joint.p  the pvalues for jointly testing each covariate in both logistic and beta component.
 #' @export
 #' @examples
@@ -54,7 +55,12 @@ zibr = function(logistic.cov=logistic.cov,
   if(sum(Y>0)/length(Y)>0.9){warning("Too few zeros in the abundance data. The logistic component may be not accurate.")}
   if(sum(Y>0)/length(Y)<0.1){warning("Too many zeros in the abundance data. The beta component may be not accurate.")}
   #### if the colnames are the same, jointly test the two component
-  if (identical(colnames(logistic.cov),colnames(beta.cov))){joint.test <- TRUE}else{joint.test <- FALSE}
+  if (identical(colnames(logistic.cov),colnames(beta.cov))){
+    joint.test <- TRUE
+  } 
+  else{
+    joint.test <- FALSE
+  }
   #### check if time.ind are the same for each subject.ind
   fit = fit_zero_inflated_beta_random_effect(X=logistic.cov,Z=beta.cov,Y=Y,
  subject.ind=subject.ind,time.ind=time.ind,joint.test=joint.test)
@@ -64,6 +70,7 @@ zibr = function(logistic.cov=logistic.cov,
               beta.est.table=fit$beta.est.table,
               beta.s2.est=fit$beta.s2.est,
               beta.v.est=fit$beta.v.est,
+              likelihood = fit$likelihood,
               joint.p=fit$joint.p))
 
 }
