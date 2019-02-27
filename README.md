@@ -288,7 +288,7 @@ Feel free to contact me (Eric Z. Chen) by chvlyl AT gmail.com
 
 ## Problems 
 I will fix those problems soon:  
-- ~~ Sometimes, the rownames (variable names) are missing in the logistic.est.table and beta.est.table.~~ 
+- [fixed] ~~ Sometimes, the rownames (variable names) are missing in the logistic.est.table and beta.est.table.~~ 
 
 ## Updates
 - Add likelihood to the output.
