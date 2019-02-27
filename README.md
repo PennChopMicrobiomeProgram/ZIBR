@@ -208,6 +208,7 @@ reg.cov.t234 <- data.frame(
 #### Fit ZIBR model on the real data
 spe.all <- colnames(taxa.data)
 p.species.list.zibr <- list()
+p.species.list.lme <- list()
 for (spe in spe.all){
   #spe = 'g__Collinsella'
   ###### create covariates
@@ -225,10 +226,11 @@ for (spe in spe.all){
   Y <- taxa.data[reg.cov.t234$Sample, spe]/100
   cat('Zeros/All',sum(Y==0),'/',length(Y),'\n')
   ####################
+  ## fit linear random effect model with arcsin square transformation on Y
   tdata <- data.frame(Y.tran=asin(sqrt(Y)),X,SID=subject.ind)
-  #lme.fit <- lme(Y.tran ~ Baseline + Time + Treat,random=~1| SID, data = tdata)
-  #coef.mat <- summary(lme.fit)$tTable[-1,c(1,5)]
-  #p.species.list.lme[[spe]] <- coef.mat[,2]
+  lme.fit <- lme(Y.tran ~ Baseline + Time + Treat,random=~1| SID, data = tdata)
+  coef.mat <- summary(lme.fit)$tTable[-1,c(1,5)]
+  p.species.list.lme[[spe]] <- coef.mat[,2]
   ###################
   if (sum(Y>0)<10 | sum(Y==0) <10 | max(Y)<0.01){
     print('skip')
