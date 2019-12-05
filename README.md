@@ -278,7 +278,12 @@ setdiff(p.species.lme.adj[p.species.zibr.adj$Time<0.05,'Species'],
         p.species.zibr.adj[p.species.lme.adj$Time<0.05,'Species'])
 ```
 
+## Missing values
+If there are missing values in certain time points, they can be imputed as following:
+1. Calculate the mean or median of values from previous time point(s) and later time points(s). Use such values to replace the missing values.
+2. Group the time point with missing values with other time points. For example, if you have T1, T2, T3 and T4 and T1 has missing values, you can group T1 and T2 as one time point.
 
+After the missing values are imputed, the data can be fed into ZIBR.
 
 ## Citation
 Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing longitudinal microbiome data. Bioinformatics. [Link](http://bioinformatics.oxfordjournals.org/content/early/2016/05/14/bioinformatics.btw308.short?rss=1)
@@ -286,12 +291,9 @@ Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing 
 ## Contact
 Feel free to contact me (Eric Z. Chen) by chvlyl AT gmail.com
 
-## Problems 
-I will fix those problems soon:  
-- [fixed] ~~ Sometimes, the rownames (variable names) are missing in the logistic.est.table and beta.est.table.~~ 
-
 ## Updates
-- Add likelihood to the output.
+
 <!---
-variable name is missing in beta.est.table
+- Add likelihood to the output.
+- variable name is missing in beta.est.table
 -->
