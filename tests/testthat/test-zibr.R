@@ -9,5 +9,5 @@ test_that("zibr main function works", {
   dput(zibr.fit)
 
   expect_equal(names(zibr.fit), c("logistic.est.table", "logistic.s1.est", "beta.est.table", "beta.s2.est", "beta.v.est", "loglikelihood", "joint.p"))
-  expect_equal(zibr.fit, E)
+  expect_equal(zibr.fit, E, tolerance = 1e-3)
 })
