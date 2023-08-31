@@ -108,7 +108,7 @@ Type ```ibd.data```.
 ...
 ```
 
-Note that each subject has four time points. In the Treatment column, 0 is for antiTNF treatment and 1 is for EEN treatment. Abundance column is the relative abundance for Eubacterium. The abudance is in the range of [0,1).  
+Note that each subject has four time points. In the Treatment column, 0 is for antiTNF treatment and 1 is for EEN treatment. Abundance column is the relative abundance for Eubacterium. The abundance is in the range of [0,1).  
 
 
 The current model can not handle missing data. That is, each subject must have the same number of time points. If any time point is missing in your data, you can (1) remove some other time points so that all subject have the same time points (2) impute the missing data, for example, use the mean or median value from other subjects at the same time point in the same covariate group to replace the missing value. I'm currently working on the missing data problem and hope that our model can handle missing data soon.
