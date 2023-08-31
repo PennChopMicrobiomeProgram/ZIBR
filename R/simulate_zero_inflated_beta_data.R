@@ -19,6 +19,7 @@
 #' @return s2 the stardard deviation of random effect in beta component
 #' @return subject.ind the IDs for each subject
 #' @return time.ind time points
+#' @importFrom stats rnorm rbinom rbeta
 #' @export
 #' @examples
 #' \dontrun{

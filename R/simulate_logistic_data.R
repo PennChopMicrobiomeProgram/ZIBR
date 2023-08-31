@@ -1,3 +1,4 @@
+#' @importFrom stats rnorm rbinom
 simulate_logistic_data = function(){
 #########################
 #########################

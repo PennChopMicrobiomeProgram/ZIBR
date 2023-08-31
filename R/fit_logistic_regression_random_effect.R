@@ -32,6 +32,7 @@ cal_logistic_loglik = function(para,X.aug,Y,subject.n,time.n,
 ### system.time(rs4 <- colSums(aperm(b, c(2,1,3))))
 
 #######################################
+#' @importFrom stats nlminb pchisq
 fit_logistic_random_effect = function(X=X,Y=Y,
                                 subject.ind=subject.ind,time.ind=time.ind,
                                 quad.n=30,verbose=FALSE){

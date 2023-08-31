@@ -39,6 +39,7 @@ cal_beta_loglik = function(para,Z.aug,Y,subject.n,time.n,
 
 
 #######################################
+#' @importFrom stats nlminb pchisq
 fit_beta_random_effect = function(Z=Z,Y=Y,
                                       subject.ind=subject.ind,time.ind=time.ind,
                                       quad.n=30,verbose=FALSE){

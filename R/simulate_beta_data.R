@@ -1,3 +1,4 @@
+#' @importFrom stats rnorm rbeta
 simulate_beta_random_effect_data = function(subject.n=50, time.n=5, v=2,
                               beta=as.matrix(c(-0.5,-0.5,0.5)),
                               Z=NA, s2=1, sim.seed=100){
@@ -13,7 +14,7 @@ simulate_beta_random_effect_data = function(subject.n=50, time.n=5, v=2,
     Z <- as.matrix(Z)
     colnames(Z) <- paste('var',seq(1,ncol(Z)),sep='')
   }
-  
+
   set.seed(sim.seed*5000+1)
   c <- as.matrix(rnorm(subject.n,mean=0,sd=s2))
   c.rep <- as.matrix(as.vector(matrix(c,nrow=time.n,ncol=length(c),byrow=TRUE)))
@@ -32,7 +33,7 @@ simulate_beta_random_effect_data = function(subject.n=50, time.n=5, v=2,
   set.seed(sim.seed*5000+4)
   Y <- rbeta(subject.n*time.n, shape1 = u*v, shape2=(1-u)*v)
   if(any(Y>1-10^(-6))){Y[Y>1-10^(-6)] <- 1-10^(-6)}
-  
+
   #### For test purpose
   #### betareg can not fit random effect model
   #### so set the s2 to a small value (small random effect)
@@ -48,7 +49,7 @@ simulate_beta_random_effect_data = function(subject.n=50, time.n=5, v=2,
   #
   #fit_beta_random_effect(Z=Z,Y=Y,subject.ind=subject.ind,time.ind=time.ind,
   #                      quad.n=30,verbose=FALSE)
-  
+
   return(list(Y=Y,Z=Z,c=c,u=u,v=v,beta=beta,s2=s2,
               subject.ind=subject.ind,time.ind=time.ind))
 }

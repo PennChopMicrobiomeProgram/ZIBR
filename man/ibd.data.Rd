@@ -4,7 +4,8 @@
 \name{ibd.data}
 \alias{ibd.data}
 \title{Longitudinal human microbiome data}
-\format{A data frame with 236 rows and 5 variables:
+\format{
+A data frame with 236 rows and 5 variables:
 \describe{
   \item{Sample}{Sample IDs}
   \item{Subject}{Subject IDs}
@@ -12,7 +13,8 @@
   \item{Treatment}{Treatment, 0 for antiTNF, 1 for EEN}
   \item{Abundance}{Abundance for Eubacterium}
   ...
-}}
+}
+}
 \usage{
 data(ibd.data)
 }
@@ -24,4 +26,3 @@ a longitudinal human microbiome study
 Lewis and Chen et al. (2016) Cell Host & Microbe 18 (4), 489-500
 }
 \keyword{datasets}
-
