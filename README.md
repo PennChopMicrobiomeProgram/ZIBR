@@ -2,6 +2,7 @@
 
 <!-- badges: start -->
   [![R-CMD-check](https://github.com/PennChopMicrobiomeProgram/ZIBR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PennChopMicrobiomeProgram/ZIBR/actions/workflows/R-CMD-check.yaml)
+  [![codecov](https://codecov.io/gh/PennChopMicrobiomeProgram/ZIBR/graph/badge.svg?token=6A7MIF2IPE)](https://codecov.io/gh/PennChopMicrobiomeProgram/ZIBR)
   <!-- badges: end -->
 
 ## Introduction
@@ -294,6 +295,10 @@ Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing 
 
 ## Contact
 Feel free to contact me (Eric Z. Chen) by chvlyl AT gmail.com
+
+## Test coverage
+
+![Coverage Graph](https://codecov.io/gh/PennChopMicrobiomeProgram/ZIBR/graphs/sunburst.svg?token=6A7MIF2IPE)
 
 ## Updates
 
