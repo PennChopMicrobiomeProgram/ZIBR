@@ -3,7 +3,7 @@
 <!-- badges: start -->
   [![R-CMD-check](https://github.com/PennChopMicrobiomeProgram/ZIBR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PennChopMicrobiomeProgram/ZIBR/actions/workflows/R-CMD-check.yaml)
   [![codecov](https://codecov.io/gh/PennChopMicrobiomeProgram/ZIBR/graph/badge.svg?token=6A7MIF2IPE)](https://codecov.io/gh/PennChopMicrobiomeProgram/ZIBR)
-  [![Published in Bioinformatics](https://img.shields.io/badge/Published%20in-Bioinformatics-blue)(http://bioinformatics.oxfordjournals.org/content/early/2016/05/14/bioinformatics.btw308.short?rss=1)]
+  [![Published in Bioinformatics](https://img.shields.io/badge/Published%20in-Bioinformatics-blue)](http://bioinformatics.oxfordjournals.org/content/early/2016/05/14/bioinformatics.btw308.short?rss=1)
   <!-- badges: end -->
 
 ## Introduction
