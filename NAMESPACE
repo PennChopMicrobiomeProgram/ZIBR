@@ -2,3 +2,8 @@
 
 export(simulate_zero_inflated_beta_random_effect_data)
 export(zibr)
+importFrom(stats,nlminb)
+importFrom(stats,pchisq)
+importFrom(stats,rbeta)
+importFrom(stats,rbinom)
+importFrom(stats,rnorm)

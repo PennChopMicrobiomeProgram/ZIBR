@@ -4,9 +4,18 @@
 \alias{simulate_zero_inflated_beta_random_effect_data}
 \title{Simulate data according to zero-inflated beta random effects model}
 \usage{
-simulate_zero_inflated_beta_random_effect_data(subject.n = 50, time.n = 5,
-  v = 2, alpha = as.matrix(c(0, 0.5, -1)), beta = as.matrix(c(-0.5, -0.5,
-  0.5)), X = NA, Z = NA, s1 = 0.2, s2 = 0.2, sim.seed = 100)
+simulate_zero_inflated_beta_random_effect_data(
+  subject.n = 50,
+  time.n = 5,
+  v = 2,
+  alpha = as.matrix(c(0, 0.5, -1)),
+  beta = as.matrix(c(-0.5, -0.5, 0.5)),
+  X = NA,
+  Z = NA,
+  s1 = 0.2,
+  s2 = 0.2,
+  sim.seed = 100
+)
 }
 \arguments{
 \item{subject.n}{number of subjects}
@@ -63,4 +72,3 @@ simulate_zero_inflated_beta_random_effect_data(
    sim.seed=100)
 }
 }
-

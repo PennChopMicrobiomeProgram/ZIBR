@@ -4,9 +4,16 @@
 \alias{zibr}
 \title{Fit zero-inflated beta regression with random effects}
 \usage{
-zibr(logistic.cov = logistic.cov, beta.cov = beta.cov, Y = Y,
-  subject.ind = subject.ind, time.ind = time.ind, quad.n = 30,
-  verbose = FALSE)
+zibr(
+  logistic.cov = logistic.cov,
+  beta.cov = beta.cov,
+  Y = Y,
+  subject.ind = subject.ind,
+  time.ind = time.ind,
+  component.wise.test = TRUE,
+  quad.n = 30,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{logistic.cov}{the covariates in logistic component}
@@ -18,6 +25,8 @@ zibr(logistic.cov = logistic.cov, beta.cov = beta.cov, Y = Y,
 \item{subject.ind}{the variable for subject IDs}
 
 \item{time.ind}{the variable for time points}
+
+\item{component.wise.test}{whether to perform component wise test. If true, ZIBR will calculate pvalues for logistic and beta component respectively.}
 
 \item{quad.n}{Gaussian quadrature points}
 
@@ -33,6 +42,8 @@ beta.est.table the estimated coefficients for logistic component.
 beta.s2.est the estimated standard deviation for the random effect in the beta component.
 
 beta.v.est the estiamted dispersion parameter in the beta component.
+
+loglikelihood  the log likelihood of fitting zibr model on the data.
 
 joint.p  the pvalues for jointly testing each covariate in both logistic and beta component.
 }
@@ -57,4 +68,3 @@ zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
 zibr.fit
 }
 }
-

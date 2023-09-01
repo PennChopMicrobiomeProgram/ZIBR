@@ -1,5 +1,10 @@
 # ZIBR (Zero-Inflated Beta Random Effect model)
 
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/PennChopMicrobiomeProgram/ZIBR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PennChopMicrobiomeProgram/ZIBR/actions/workflows/R-CMD-check.yaml)
+  [![codecov](https://codecov.io/gh/PennChopMicrobiomeProgram/ZIBR/graph/badge.svg?token=6A7MIF2IPE)](https://codecov.io/gh/PennChopMicrobiomeProgram/ZIBR)
+  <!-- badges: end -->
+
 ## Introduction
 The longitudinal microbiome compositional data are highly skewed, bounded in [0,1), and often sparse with many zeros. In addition, the observations from repeated measures are correlated. We propose a two-part zero-inflated Beta regression model with random effects (ZIBR) for testing the association between microbial abundance and clinical covariates for longitudinal microbiome data. The model includes a logistic component to model presence/absence of the microbe in samples and a Beta component to model non-zero microbial abundance and each component includes a random effect to take into account the correlation among repeated measurements on the same subject.
 
@@ -81,7 +86,7 @@ zibr.fit
 #### Real data  
 Let's try anohter example on the real data. I will use a dataset from a longitudinal human microbiome study containing the bacterial abundance and clinical information from [Lewis and Chen et al.](http://www.cell.com/cell-host-microbe/references/S1931-3128(15)00377-7). I only include the abundance from one genus.   
 
-Type ```ibd.data```.
+Type ```ibd```.
 ```r
      Sample Subject Time Treatment    Abundance
 1   5001-01    5001    1         0 0.000000e+00
@@ -116,10 +121,10 @@ The current model can not handle missing data. That is, each subject must have t
 We can run the zibr function to the real data. Here, I'm interested in comparing the two treatments and use treatment as the only covariate in both logistic and beta component. Depending on the scientific questions you are interested in, you can also include time and treament-time interaction in the covariates. 
 
 ```r
-zibr.fit <- zibr(logistic.cov = data.frame(Treatment=ibd.data$Treatment), 
-    beta.cov = data.frame(Treatment=ibd.data$Treatment), 
-    Y = ibd.data$Abundance, subject.ind = ibd.data$Subject,
-    time.ind = ibd.data$Time)
+zibr.fit <- zibr(logistic.cov = data.frame(Treatment=ibd$Treatment), 
+    beta.cov = data.frame(Treatment=ibd$Treatment), 
+    Y = ibd$Abundance, subject.ind = ibd$Subject,
+    time.ind = ibd$Time)
 zibr.fit
 ```
 

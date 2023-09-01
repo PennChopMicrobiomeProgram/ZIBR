@@ -4,7 +4,6 @@
 #' a longitudinal human microbiome study
 #'
 #' @docType data
-#' @usage data(ibd.data)
 #' @keywords datasets
 #'
 #' @format A data frame with 236 rows and 5 variables:
@@ -17,4 +16,4 @@
 #'   ...
 #' }
 #' @references Lewis and Chen et al. (2016) Cell Host & Microbe 18 (4), 489-500
-"ibd.data"
+"ibd"

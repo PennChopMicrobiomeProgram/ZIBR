@@ -34,6 +34,7 @@ cal_zibeta_loglik = function(para,
 #######################################
 
 #######################################
+#' @importFrom stats nlminb pchisq
 fit_zero_inflated_beta_random_effect = function(X=X,Z=Z,Y=Y,
                                                 subject.ind=subject.ind,time.ind=time.ind,
                                                 component.wise.test = TRUE,

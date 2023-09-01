@@ -59,7 +59,7 @@ zibr = function(logistic.cov=logistic.cov,
   #### if the colnames are the same, jointly test the two component
   if (identical(colnames(logistic.cov),colnames(beta.cov))){
     joint.test <- TRUE
-  } 
+  }
   else{
     joint.test <- FALSE
   }
