@@ -296,10 +296,6 @@ Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing 
 ## Contact
 Feel free to contact me (Eric Z. Chen) by chvlyl AT gmail.com
 
-## Test coverage
-
-![Coverage Graph](https://codecov.io/gh/PennChopMicrobiomeProgram/ZIBR/graphs/sunburst.svg?token=6A7MIF2IPE)
-
 ## Updates
 
 <!---
