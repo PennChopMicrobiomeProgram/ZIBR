@@ -1,33 +1,33 @@
 #' @importFrom stats rnorm rbinom
 simulate_logistic_data <- function() {
   #### logistic regression
-  sim.seed <- 18642
-  time.n <- 5
-  subject.n <- 20
+  sim_seed <- 18642
+  time_n <- 5
+  subject_n <- 20
   s1 <- 0.5
   alpha <- as.matrix(c(0, 0.5, -1))
   ######
-  set.seed(sim.seed + 10)
+  set.seed(sim_seed + 10)
   X <- as.matrix(data.frame(
-    log.Time = as.matrix(log(rep(seq(1, time.n), subject.n))),
-    Treatment = as.matrix(c(rep(0, subject.n * time.n / 2), rep(1, subject.n * time.n / 2)))
+    log.Time = as.matrix(log(rep(seq(1, time_n), subject_n))),
+    Treatment = as.matrix(c(rep(0, subject_n * time_n / 2), rep(1, subject_n * time_n / 2)))
   ))
   ######
-  set.seed(sim.seed + 2)
-  b <- as.matrix(rnorm(subject.n, mean = 0, sd = s1))
-  b.rep <- as.matrix(as.vector(matrix(b, nrow = time.n, ncol = length(b), byrow = TRUE)))
+  set.seed(sim_seed + 2)
+  b <- as.matrix(rnorm(subject_n, mean = 0, sd = s1))
+  b_rep <- as.matrix(as.vector(matrix(b, nrow = time_n, ncol = length(b), byrow = TRUE)))
   #####
-  subject.ind <- as.vector(matrix(paste("Subject_", seq(1, subject.n), sep = ""), nrow = time.n, ncol = subject.n, byrow = TRUE))
-  time.ind <- rep(seq(1, time.n), subject.n)
+  subject_ind <- as.vector(matrix(paste("Subject_", seq(1, subject_n), sep = ""), nrow = time_n, ncol = subject_n, byrow = TRUE))
+  time_ind <- rep(seq(1, time_n), subject_n)
   ######
-  X.aug <- cbind(interespt = 1, X)
+  x_aug <- cbind(interespt = 1, X)
   ######
-  logit.p <- X.aug %*% alpha + b.rep
+  logit_p <- x_aug %*% alpha + b_rep
   ######
-  p <- 1 / (1 + exp(-logit.p))
+  p <- 1 / (1 + exp(-logit_p))
   ######
-  set.seed(sim.seed + 3)
-  Y <- rbinom(subject.n * time.n, 1, p)
+  set.seed(sim_seed + 3)
+  Y <- rbinom(subject_n * time_n, 1, p)
 
-  list(X = X, Y = Y, b = b, subject.ind = subject.ind, time.ind = time.ind)
+  list(X = X, Y = Y, b = b, subject_ind = subject_ind, time_ind = time_ind)
 }
