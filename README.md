@@ -22,7 +22,7 @@ Accordingly, we can test three biologically relevant null hypotheses:
 ## Installation
 You can install our ZIBR package from Github
 ```r
-install.packages("devtools")
+#install.packages("devtools")
 devtools::install_github("PennChopMicrobiomeProgram/ZIBR")
 library(ZIBR)
 ```
@@ -30,7 +30,7 @@ library(ZIBR)
 ## Basic Usage
 
 ```r
-zibr(logistic.cov=logistic.cov,beta.cov=beta.cov,Y=Y,subject.ind=subject.ind,time.ind=time.ind)
+zibr.fit <- zibr(logistic.cov=logistic.cov,beta.cov=beta.cov,Y=Y,subject.ind=subject.ind,time.ind=time.ind)
 ```
 
 - **logistic.cov**: covariates for the logistic component. Rows: samples. Columns: covariates.  
@@ -39,9 +39,14 @@ zibr(logistic.cov=logistic.cov,beta.cov=beta.cov,Y=Y,subject.ind=subject.ind,tim
 - **subject.ind**: the variable with subject IDs.   
 - **time.ind**: the variable with time points.   
 
-The ordering of the samples in the above matrix or vectors must be consistent. 
+The ordering of the samples in the above matrix or vectors must be consistent.
 
-The zibr function will return the following results:
+The zibr function will return the following results
+
+```r
+zibr.fit
+```
+
 - **logistic.est.table**: the estimated coefficients for logistic component.  
 - **logistic.s1.est**: the estimated standard deviation for the random effect in the logistic component.  
 - **beta.est.table**: the estimated coefficients for Beta component.  
@@ -49,12 +54,18 @@ The zibr function will return the following results:
 - **beta.v.est**: the estiamted dispersion parameter in the Beta component.  
 - **joint.p**: the pvalues for jointly testing each covariate in both logistic and Beta component.  
 
-## Missing values
+## Troubleshooting
+
+### Missing values
 If there are missing values in certain time points, they can be imputed as following:
 1. Calculate the mean or median of values from previous time point(s) and later time points(s). Use such values to replace the missing values.
 2. Group the time point with missing values with other time points. For example, if you have T1, T2, T3 and T4 and T1 has missing values, you can group T1 and T2 as one time point.
 
 After the missing values are imputed, the data can be fed into ZIBR.
+
+### Other issues
+
+If you have other problems with the package or features/fixes to suggest, please open an issue on the [GitHub issues page](https://github.com/PennChopMicrobiomeProgram/ZIBR/issues).
 
 ## Citation
 Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing longitudinal microbiome data. Bioinformatics. [Link](http://bioinformatics.oxfordjournals.org/content/early/2016/05/14/bioinformatics.btw308.short?rss=1)

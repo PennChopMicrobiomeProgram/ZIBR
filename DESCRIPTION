@@ -3,8 +3,8 @@ Type: Package
 Title: A zero-inflated beta random effect model
 Version: 0.1
 Date: 2017-01-25
-Author: Eric Zhang Chen
-Maintainer: Eric Zhang Chen <chvlyl@gmail.com>
+Authors@R: person("Eric", "Zhang Chen", email = "chvlyl@gmail.com", role = c("aut")),
+    person("Charlie", "Bushman", email = "ctbushman@gmail.com", role = c("cre"))
 Description: A zero-inflated beta random effect model for longitudinal
     microbiome data.
 License: file LICENSE
@@ -12,8 +12,9 @@ LazyData: TRUE
 RoxygenNote: 7.2.3
 Encoding: UTF-8
 Suggests:
+    betareg,
     dplyr,
-    nlme,
+    lme4 (>= 1.1-34),
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
