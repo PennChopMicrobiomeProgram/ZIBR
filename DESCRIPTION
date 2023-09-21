@@ -3,8 +3,8 @@ Type: Package
 Title: A zero-inflated beta random effect model
 Version: 0.1
 Date: 2017-01-25
-Authors@R: person("Eric", "Zhang Chen", email = "chvlyl@gmail.com", role = c("aut")),
-    person("Charlie", "Bushman", email = "ctbushman@gmail.com", role = c("cre"))
+Authors@R: c(person("Eric", "Zhang Chen", email = "chvlyl@gmail.com", role = c("aut")),
+    person("Charlie", "Bushman", email = "ctbushman@gmail.com", role = c("cre")))
 Description: A zero-inflated beta random effect model for longitudinal
     microbiome data.
 License: file LICENSE

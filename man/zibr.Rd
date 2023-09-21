@@ -54,17 +54,20 @@ Fit zero-inflated beta regression with random effects
 \dontrun{
 ## simulate some data
 sim <- simulate_zero_inflated_beta_random_effect_data(
-subject.n=100,time.n=5,
-X = as.matrix(c(rep(0,50*5),rep(1,50*5))),
-Z = as.matrix(c(rep(0,50*5),rep(1,50*5))),
-alpha = as.matrix(c(-0.5,1)),
-beta = as.matrix(c(-0.5,0.5)),
-s1 = 1,s2 = 0.8,
-v = 5,
-sim.seed=100)
+  subject.n = 100, time.n = 5,
+  X = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
+  Z = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
+  alpha = as.matrix(c(-0.5, 1)),
+  beta = as.matrix(c(-0.5, 0.5)),
+  s1 = 1, s2 = 0.8,
+  v = 5,
+  sim.seed = 100
+)
 ## run zibr on the simulated data
-zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
-                 subject.ind = sim$subject.ind,time.ind = sim$time.ind)
+zibr.fit <- zibr(
+  logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
+  subject.ind = sim$subject.ind, time.ind = sim$time.ind
+)
 zibr.fit
 }
 }
