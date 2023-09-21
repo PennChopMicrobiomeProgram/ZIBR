@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ZIBR)
 library(dplyr)
-library(nlme)
 
 set.seed(19683)
 ```
@@ -41,14 +40,14 @@ The following function will simulate some data according to the zero-inflated be
 
 ```{r}
 sim <- simulate_zero_inflated_beta_random_effect_data(
-  subject.n = 100, time.n = 5,
+  subject_n = 100, time_n = 5,
   X = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
   Z = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
   alpha = as.matrix(c(-0.5, 1)),
   beta = as.matrix(c(-0.5, 0.5)),
   s1 = 1, s2 = 0.8,
   v = 5,
-  sim.seed = 100
+  sim_seed = 100
 )
 names(sim)
 ```

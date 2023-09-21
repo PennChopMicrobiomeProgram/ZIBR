@@ -5,8 +5,8 @@
 \title{Simulate data according to zero-inflated beta random effects model}
 \usage{
 simulate_zero_inflated_beta_random_effect_data(
-  subject.n = 50,
-  time.n = 5,
+  subject_n = 50,
+  time_n = 5,
   v = 2,
   alpha = as.matrix(c(0, 0.5, -1)),
   beta = as.matrix(c(-0.5, -0.5, 0.5)),
@@ -14,13 +14,13 @@ simulate_zero_inflated_beta_random_effect_data(
   Z = NA,
   s1 = 0.2,
   s2 = 0.2,
-  sim.seed = 100
+  sim_seed = 100
 )
 }
 \arguments{
-\item{subject.n}{number of subjects}
+\item{subject_n}{number of subjects}
 
-\item{time.n}{number of time points for each subject}
+\item{time_n}{number of time points for each subject}
 
 \item{v}{the dispersion parameter in beta component}
 
@@ -36,7 +36,7 @@ simulate_zero_inflated_beta_random_effect_data(
 
 \item{s2}{the stardard deviation of random effect in beta component}
 
-\item{sim.seed}{the random seed}
+\item{sim_seed}{the random seed}
 }
 \value{
 Y the bacterial abundance generated from the model
@@ -63,13 +63,13 @@ Simulate data according to zero-inflated beta random effects model
 \examples{
 \dontrun{
 simulate_zero_inflated_beta_random_effect_data(
-  subject.n = 100, time.n = 5,
+  subject_n = 100, time_n = 5,
   X = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
   alpha = as.matrix(c(-0.5, 1)),
   beta = as.matrix(c(-0.5, 0.5)),
   s1 = 1, s2 = 0.8,
   v = 5,
-  sim.seed = 100
+  sim_seed = 100
 )
 }
 }

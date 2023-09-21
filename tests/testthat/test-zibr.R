@@ -15,14 +15,14 @@ test_that("zibr main function works on package data", {
 set.seed(19683)
 
 sim <- simulate_zero_inflated_beta_random_effect_data(
-  subject.n = 100, time.n = 5,
+  subject_n = 100, time_n = 5,
   X = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
   Z = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
   alpha = as.matrix(c(-0.5, 1)),
   beta = as.matrix(c(-0.5, 0.5)),
   s1 = 1, s2 = 0.8,
   v = 5,
-  sim.seed = 100
+  sim_seed = 100
 )
 
 sim_expected <- list(logistic.est.table = structure(c(-0.571900346260645, 0.828072571379781, 0.0069577928092327, 0.00547006539016526), .Dim = c(2L, 2L), .Dimnames = list(c("intersept", "var1"), c("Estimate", "Pvalue"))), logistic.s1.est = 1.06801391077711, beta.est.table = structure(c(-0.593090577296489, 0.591745582740125, 4.18162741963046e-05, 0.00169945318503251), .Dim = c(2L, 2L), .Dimnames = list(c("intersept", "var1"), c("Estimate", "Pvalue"))), beta.s2.est = 0.630386186272789, beta.v.est = 4.73406414312415, loglikelihood = NA, joint.p = NA)
