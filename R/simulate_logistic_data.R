@@ -29,5 +29,5 @@ simulate_logistic_data <- function() {
   set.seed(sim.seed + 3)
   Y <- rbinom(subject.n * time.n, 1, p)
 
-  return(list(X = X, Y = Y, b = b, subject.ind = subject.ind, time.ind = time.ind))
+  list(X = X, Y = Y, b = b, subject.ind = subject.ind, time.ind = time.ind)
 }
