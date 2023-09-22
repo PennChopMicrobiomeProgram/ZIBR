@@ -61,7 +61,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
   prod.mat <- matrix(rep(c(rep(1, time.n), rep(0, subject.n * time.n)), subject.n)[1:(subject.n^2 * time.n)], byrow = TRUE, nrow = subject.n, ncol = subject.n * time.n)
   #############
   #### generate quad points
-  gherm <- generate_gaussian_quad_points(quad.n = quad.n)
+  gherm <- generate_gaussian_quad_points(quad_n = quad.n)
   gh.weights <- matrix(rep(gherm$weights, subject.n), nrow = subject.n, byrow = TRUE)
   gh.nodes <- matrix(rep(gherm$nodes, subject.n * time.n),
     nrow = subject.n * time.n, byrow = TRUE

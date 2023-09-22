@@ -1,3 +1,11 @@
+#' Provide a pregenerated gaussian hermitian quad point distribution
+#'
+#' @param quad_n the number of points in the distribution (selected from 10, 20, 30, 50 or 100, default 30)
+#' @return a structure with a named list
+#' \itemize {
+#'   \item nodes a vector of nodes
+#'   \item weights a vector of weights for nodes
+#' }
 generate_gaussian_quad_points <- function(quad_n = 30) {
   ## library(statmod)
   ## gherm <- gauss.quad(100, kind = "hermite")
@@ -143,8 +151,9 @@ generate_gaussian_quad_points <- function(quad_n = 30) {
         "weights"
       ))
   } else {
-    cat("quad_n should be 10,20,30,50 or 100. Use 30 instead.\n")
+    cat("quad_n should be 10, 20, 30, 50 or 100. Using 30 instead...\n")
     gherm <- generate_gaussian_quad_points(quad_n = 30)
   }
-  return(gherm)
+
+  gherm
 }
