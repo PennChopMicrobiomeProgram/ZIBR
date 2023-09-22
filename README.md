@@ -10,7 +10,7 @@
 The longitudinal microbiome compositional data are highly skewed, bounded in [0,1), and often sparse with many zeros. In addition, the observations from repeated measures are correlated. We propose a two-part zero-inflated Beta regression model with random effects (ZIBR) for testing the association between microbial abundance and clinical covariates for longitudinal microbiome data. The model includes a logistic component to model presence/absence of the microbe in samples and a Beta component to model non-zero microbial abundance and each component includes a random effect to take into account the correlation among repeated measurements on the same subject.
 
 The details of the statistical model are as follows:
-<img src="inst/image/zibr.png" width="600" align="center">
+<img src="vignettes/zibr_stat_model.png" width="600" align="center">
 
 The ZIBR model combines the logistic regression and Beta regression in one model. Each regression part includes random effects to account for correlations acorss time points. We call these two regressions in ZIBR model as logistic component and Beta component. These two components model two different aspects of the data. The logistic component models presence/absence of the microbe and Beta component models non-zero microbial abundance.
 
@@ -71,7 +71,7 @@ If you have other problems with the package or features/fixes to suggest, please
 Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing longitudinal microbiome data. Bioinformatics. [Link](http://bioinformatics.oxfordjournals.org/content/early/2016/05/14/bioinformatics.btw308.short?rss=1)
 
 ## Contact
-Feel free to contact me (Eric Z. Chen) by chvlyl AT gmail.com
+Maintained by Charlie Bushman (ctbushman\@gmail.com) and the Penn CHOP Microbiome Program.
 
 ## Updates
 
