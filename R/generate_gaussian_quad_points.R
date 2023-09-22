@@ -1,7 +1,7 @@
-generate_gaussian_quad_points <- function(quad.n = 30) {
+generate_gaussian_quad_points <- function(quad_n = 30) {
   ## library(statmod)
   ## gherm <- gauss.quad(100, kind = "hermite")
-  if (quad.n == 10) {
+  if (quad_n == 10) {
     gherm <-
       structure(
         list(
@@ -20,7 +20,7 @@ generate_gaussian_quad_points <- function(quad.n = 30) {
         ),
         .Names = c("nodes", "weights")
       )
-  } else if (quad.n == 20) {
+  } else if (quad_n == 20) {
     gherm <- structure(list(
       nodes = c(
         -5.38748089001124, -4.60368244955074, -3.94476404011562, -3.34785456738321, -2.78880605842813, -2.25497400208927, -1.73853771211659, -1.23407621539532, -0.737473728545395, -0.245340708300901, 0.245340708300901, 0.737473728545395, 1.23407621539532, 1.73853771211659, 2.25497400208927, 2.78880605842813, 3.34785456738321, 3.94476404011562, 4.60368244955074, 5.38748089001124
@@ -35,7 +35,7 @@ generate_gaussian_quad_points <- function(quad.n = 30) {
         4.39934099227317e-10, 2.22939364553411e-13
       )
     ), .Names = c("nodes", "weights"))
-  } else if (quad.n == 30) {
+  } else if (quad_n == 30) {
     gherm <-
       structure(list(
         nodes = c(
@@ -56,7 +56,7 @@ generate_gaussian_quad_points <- function(quad.n = 30) {
           2.90825470013124e-21
         )
       ), .Names = c("nodes", "weights"))
-  } else if (quad.n == 50) {
+  } else if (quad_n == 50) {
     gherm <- structure(list(
       nodes = c(
         -9.18240695812932, -8.5227710309178, -7.97562236820564, -7.4864094298642, -7.03432350977062, -6.60864797385536, -6.20295251927467, -5.8129946754204, -5.43578608722496, -5.06911758491724, -4.71129366616904, -4.36097316045458, -4.01706817285814, -3.67867706251527, -3.34503831393789, -3.01549776957452, -2.68948470226775, -2.36649390429866, -2.04607196868641, -1.7278065475159, -1.4113177548983, -1.09625112895768, -0.782271729554607, -0.469059056678236, -0.156302546889468, 0.156302546889468,
@@ -85,7 +85,7 @@ generate_gaussian_quad_points <- function(quad.n = 30) {
         1.21524412340456e-28, 1.67380166790793e-32, 1.83379404857339e-37
       )
     ), .Names = c("nodes", "weights"))
-  } else if (quad.n == 100) {
+  } else if (quad_n == 100) {
     gherm <-
       structure(list(
         nodes = c(
@@ -143,8 +143,8 @@ generate_gaussian_quad_points <- function(quad.n = 30) {
         "weights"
       ))
   } else {
-    cat("quad.n should be 10,20,30,50 or 100. Use 30 instead.\n")
-    gherm <- generate_gaussian_quad_points(quad.n = 30)
+    cat("quad_n should be 10,20,30,50 or 100. Use 30 instead.\n")
+    gherm <- generate_gaussian_quad_points(quad_n = 30)
   }
   return(gherm)
 }
