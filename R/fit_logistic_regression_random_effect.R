@@ -56,7 +56,7 @@ fit_logistic_random_effect <- function(X = X, Y = Y,
                      ncol = subject.n * time.n)
   #############
   #### generate quad points
-  gherm <- generate_gaussian_quad_points(quad_n = quad.n)
+  gherm <- statmod::gauss.quad(quad.n, kind = "hermite")
   gh.weights <- matrix(rep(gherm$weights, subject.n), nrow = subject.n, byrow = TRUE)
   gh.nodes <- matrix(rep(gherm$nodes, subject.n * time.n),
     nrow = subject.n * time.n, byrow = TRUE
