@@ -17,8 +17,8 @@
 #' @return beta the coefficients in beta component
 #' @return s1 the stardard deviation of random effect in logistic component
 #' @return s2 the stardard deviation of random effect in beta component
-#' @return subject_ind the IDs for each subject
-#' @return time_ind time points
+#' @return subject.ind the IDs for each subject
+#' @return time.ind time points
 #' @importFrom stats rnorm rbinom rbeta
 #' @export
 #' @examples
@@ -59,25 +59,25 @@ simulate_zero_inflated_beta_random_effect_data <- function(subject_n = 50, time_
 
   set.seed(sim_seed * 5000 + 1)
   b <- as.matrix(rnorm(subject_n, mean = 0, sd = s1))
-  b_rep <- as.matrix(as.vector(matrix(b, nrow = time_n, ncol = length(b), byrow = TRUE)))
+  b.rep <- as.matrix(as.vector(matrix(b, nrow = time_n, ncol = length(b), byrow = TRUE)))
   set.seed(sim_seed * 5000 + 2)
   c <- as.matrix(rnorm(subject_n, mean = 0, sd = s2))
-  c_rep <- as.matrix(as.vector(matrix(c, nrow = time_n, ncol = length(c), byrow = TRUE)))
+  c.rep <- as.matrix(as.vector(matrix(c, nrow = time_n, ncol = length(c), byrow = TRUE)))
   #####
-  subject_ind <- as.vector(matrix(paste("Subject_", seq(1, subject_n), sep = ""), nrow = time_n, ncol = subject_n, byrow = TRUE))
-  time_ind <- rep(seq(1, time_n), subject_n)
+  subject.ind <- as.vector(matrix(paste("Subject_", seq(1, subject_n), sep = ""), nrow = time_n, ncol = subject_n, byrow = TRUE))
+  time.ind <- rep(seq(1, time_n), subject_n)
   ######
-  x_aug <- cbind(interespt = 1, X)
-  z_aug <- cbind(intersept = 1, Z)
+  X.aug <- cbind(interespt = 1, X)
+  Z.aug <- cbind(intersept = 1, Z)
   # browser()
-  logit_p <- X_aug %*% alpha + b_rep
-  logit_u <- z_aug %*% beta + c_rep
-  # print(z_aug %*% beta)
+  logit.p <- X.aug %*% alpha + b.rep
+  logit.u <- Z.aug %*% beta + c.rep
+  # print(Z.aug %*% beta)
   ##### beta can not be too big, otherwise u will be close to 1
 
   ######
-  p <- 1 / (1 + exp(-logit_p))
-  u <- 1 / (1 + exp(-logit_u))
+  p <- 1 / (1 + exp(-logit.p))
+  u <- 1 / (1 + exp(-logit.u))
   # set.seed(sim_seed+2)
   # v <- runif(1,0,5) ## v is the phi
   if (is.na(v)) {
@@ -88,12 +88,12 @@ simulate_zero_inflated_beta_random_effect_data <- function(subject_n = 50, time_
   ######
   Y <- rep(NA, subject_n * time_n)
   set.seed(sim_seed * 5000 + 3)
-  ind_mix <- rbinom(length(Y), 1, p)
+  ind.mix <- rbinom(length(Y), 1, p)
   for (i in 1:length(Y)) {
-    if (ind_mix[i] == 0) {
+    if (ind.mix[i] == 0) {
       Y[i] <- 0
     }
-    if (ind_mix[i] == 1) {
+    if (ind.mix[i] == 1) {
       # rbeta(n, shape1, shape2, ncp = 0)
       set.seed(sim_seed * 5000 + i)
       Y[i] <- rbeta(1, shape1 = u[i] * v, shape2 = (1 - u[i]) * v)
@@ -106,5 +106,8 @@ simulate_zero_inflated_beta_random_effect_data <- function(subject_n = 50, time_
     }
   }
 
-  list(Y = Y, X = X, Z = Z, b = b, c = c, u = u, v = v, alpha = alpha, beta = beta, s1 = s1, s2 = s2, subject_ind = subject_ind, time_ind = time_ind)
+  return(list(
+    Y = Y, X = X, Z = Z, b = b, c = c, u = u, v = v, alpha = alpha, beta = beta, s1 = s1, s2 = s2,
+    subject.ind = subject.ind, time.ind = time.ind
+  ))
 }
