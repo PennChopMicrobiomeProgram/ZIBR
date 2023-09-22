@@ -5,11 +5,11 @@ test_that("simulate_beta_data works", {
 
   # betareg can not fit random effect model so set the s2 to a small value (small random effect)
   tdata <- data.frame(Y = beta_data$Y, beta_data$Z, SID = beta_data$subject_ind)
-  gy <- betareg(beta_data$Y ~ log.Time + as.factor(Treatment), data = tdata, type = "ML")
+  gy <- betareg::betareg(beta_data$Y ~ log.Time + as.factor(Treatment), data = tdata, type = "ML")
   print(summary(gy))
-  gy <- betareg(beta_data$Y ~ log.Time + as.factor(Treatment), data = tdata, type = "BC")
+  gy <- betareg::betareg(beta_data$Y ~ log.Time + as.factor(Treatment), data = tdata, type = "BC")
   print(summary(gy))
-  gy <- betareg(beta_data$Y ~ log.Time + as.factor(Treatment), data = tdata, type = "BR")
+  gy <- betareg::betareg(beta_data$Y ~ log.Time + as.factor(Treatment), data = tdata, type = "BR")
   print(summary(gy))
 
   res <- fit_beta_random_effect(Z = beta_data$Z, Y = beta_data$Y, subject.ind = beta_data$subject_ind, time.ind = beta_data$time_ind, quad.n = 30, verbose = FALSE)

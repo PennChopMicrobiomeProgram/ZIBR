@@ -30,19 +30,20 @@
 #'   sim_seed = 100
 #' )
 #' ## run zibr on the simulated data
-#' zibr.fit <- zibr(
+#' zibr_fit <- zibr(
 #'   logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
 #'   subject.ind = sim$subject.ind, time.ind = sim$time.ind
 #' )
-#' zibr.fit
+#' zibr_fit
 #' }
-zibr <- function(logistic.cov = logistic.cov,
-                 beta.cov = beta.cov,
-                 Y = Y,
-                 subject.ind = subject.ind,
-                 time.ind = time.ind,
+zibr <- function(logistic.cov,
+                 beta.cov,
+                 Y,
+                 subject.ind,
+                 time.ind,
                  component.wise.test = TRUE,
-                 quad.n = 30, verbose = FALSE) {
+                 quad.n = 30,
+                 verbose = FALSE) {
   Y <- as.matrix(Y)
   #### check if Y is in [0,1)
   if (min(Y) < 0 | max(Y) >= 1) {
@@ -71,7 +72,7 @@ zibr <- function(logistic.cov = logistic.cov,
     subject.ind = subject.ind, time.ind = time.ind, joint.test = joint.test
   )
 
-  return(list(
+  list(
     logistic.est.table = fit$logistic.est.table,
     logistic.s1.est = fit$logistic.s1.est,
     beta.est.table = fit$beta.est.table,
@@ -79,5 +80,5 @@ zibr <- function(logistic.cov = logistic.cov,
     beta.v.est = fit$beta.v.est,
     loglikelihood = fit$loglikelihood,
     joint.p = fit$joint.p
-  ))
+  )
 }

@@ -5,11 +5,11 @@
 \title{Fit zero-inflated beta regression with random effects}
 \usage{
 zibr(
-  logistic.cov = logistic.cov,
-  beta.cov = beta.cov,
-  Y = Y,
-  subject.ind = subject.ind,
-  time.ind = time.ind,
+  logistic.cov,
+  beta.cov,
+  Y,
+  subject.ind,
+  time.ind,
   component.wise.test = TRUE,
   quad.n = 30,
   verbose = FALSE
@@ -64,10 +64,10 @@ sim <- simulate_zero_inflated_beta_random_effect_data(
   sim_seed = 100
 )
 ## run zibr on the simulated data
-zibr.fit <- zibr(
+zibr_fit <- zibr(
   logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
   subject.ind = sim$subject.ind, time.ind = sim$time.ind
 )
-zibr.fit
+zibr_fit
 }
 }
