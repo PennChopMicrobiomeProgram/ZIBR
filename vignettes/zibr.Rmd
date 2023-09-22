@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ZIBR)
 library(dplyr)
+library(nlme)
 
 set.seed(19683)
 ```
@@ -222,7 +223,7 @@ for (spe in spe.all) {
   ####################
   ## fit linear random effect model with arcsin square transformation on Y
   tdata <- data.frame(Y.tran = asin(sqrt(Y)), X, SID = subject.ind)
-  lme.fit <- lme4::lme(Y.tran ~ Baseline + Time + Treat, random = ~ 1 | SID, data = tdata)
+  lme.fit <- nlme::lme(Y.tran ~ Baseline + Time + Treat, random = ~ 1 | SID, data = tdata)
   coef.mat <- summary(lme.fit)$tTable[-1, c(1, 5)]
   p.species.list.lme[[spe]] <- coef.mat[, 2]
   ###################
