@@ -1,10 +1,10 @@
 #' Fit zero-inflated beta regression with random effects
 #'
-#' @param logistic.cov the covariates in logistic component
-#' @param beta.cov the covariates in beta component
+#' @param logistic_cov the covariates in logistic component
+#' @param beta_cov the covariates in beta component
 #' @param Y the response variable in the regression model
-#' @param subject.ind the variable for subject IDs
-#' @param time.ind the variable for time points
+#' @param subject_ind the variable for subject IDs
+#' @param time_ind the variable for time points
 #' @param component.wise.test whether to perform component wise test.
 #'   If true, ZIBR will calculate pvalues for logistic and beta component respectively.
 #' @param quad.n Gaussian quadrature points
@@ -32,16 +32,16 @@
 #' )
 #' ## run zibr on the simulated data
 #' zibr_fit <- zibr(
-#'   logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
-#'   subject.ind = sim$subject.ind, time.ind = sim$time.ind
+#'   logistic_cov = sim$X, beta_cov = sim$Z, Y = sim$Y,
+#'   subject_ind = sim$subject.ind, time_ind = sim$time.ind
 #' )
 #' zibr_fit
 #' }
-zibr <- function(logistic.cov,
-                 beta.cov,
+zibr <- function(logistic_cov,
+                 beta_cov,
                  Y,
-                 subject.ind,
-                 time.ind,
+                 subject_ind,
+                 time_ind,
                  component.wise.test = TRUE,
                  quad.n = 30,
                  verbose = FALSE) {
@@ -51,7 +51,7 @@ zibr <- function(logistic.cov,
     stop("The response variable should be in [0,1)")
   }
   #### check the dimentions of X,Z,Y
-  if (nrow(logistic.cov) != nrow(Y) || nrow(beta.cov) != nrow(Y)) {
+  if (nrow(logistic_cov) != nrow(Y) || nrow(beta_cov) != nrow(Y)) {
     stop("The dimensions of covariates and repsonse variable are not correct")
   }
   #### check how many zeros in Y
@@ -62,15 +62,15 @@ zibr <- function(logistic.cov,
     warning("Too many zeros in the abundance data. The beta component may be not accurate.")
   }
   #### if the colnames are the same, jointly test the two component
-  if (identical(colnames(logistic.cov), colnames(beta.cov))) {
+  if (identical(colnames(logistic_cov), colnames(beta_cov))) {
     joint.test <- TRUE
   } else {
     joint.test <- FALSE
   }
-  #### check if time.ind are the same for each subject.ind
+  #### check if time_ind are the same for each subject_ind
   fit <- fit_zero_inflated_beta_random_effect(
-    X = logistic.cov, Z = beta.cov, Y = Y,
-    subject.ind = subject.ind, time.ind = time.ind, joint.test = joint.test
+    X = logistic_cov, Z = beta_cov, Y = Y,
+    subject.ind = subject_ind, time.ind = time_ind, joint.test = joint.test
   )
 
   list(

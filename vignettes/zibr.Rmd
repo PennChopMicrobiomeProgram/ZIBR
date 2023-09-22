@@ -59,8 +59,8 @@ The simulation function returns the the bacterial abundance (Y) simulated accord
 We can run the zibr function to fit the zero-inflated beta random effect model on the simulated data.
 ```{r}
 zibr_fit <- zibr(
-  logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
-  subject.ind = sim$subject.ind, time.ind = sim$time.ind
+  logistic_cov = sim$X, beta_cov = sim$Z, Y = sim$Y,
+  subject_ind = sim$subject.ind, time_ind = sim$time.ind
 )
 zibr_fit
 ```
@@ -69,8 +69,8 @@ If we use the same covariates for logistic and beta components, ZIBR can jointly
 
 ```{r}
 zibr_fit <- zibr(
-  logistic.cov = sim$X, beta.cov = sim$X, Y = sim$Y,
-  subject.ind = sim$subject.ind, time.ind = sim$time.ind
+  logistic_cov = sim$X, beta_cov = sim$X, Y = sim$Y,
+  subject_ind = sim$subject.ind, time_ind = sim$time.ind
 )
 zibr_fit
 ```
@@ -91,10 +91,10 @@ We can run the zibr function to the real data. Here, I'm interested in comparing
 
 ```{r}
 zibr_fit <- zibr(
-  logistic.cov = data.frame(Treatment = ibd$Treatment),
-  beta.cov = data.frame(Treatment = ibd$Treatment),
-  Y = ibd$Abundance, subject.ind = ibd$Subject,
-  time.ind = ibd$Time
+  logistic_cov = data.frame(Treatment = ibd$Treatment),
+  beta_cov = data.frame(Treatment = ibd$Treatment),
+  Y = ibd$Abundance, subject_ind = ibd$Subject,
+  time_ind = ibd$Time
 )
 zibr_fit
 ```
@@ -232,9 +232,9 @@ for (spe in spe.all) {
     next
   } else {
     est <- zibr(
-      logistic.cov = X, beta.cov = Z, Y = Y,
-      subject.ind = subject.ind,
-      time.ind = time.ind,
+      logistic_cov = X, beta_cov = Z, Y = Y,
+      subject_ind = subject.ind,
+      time_ind = time.ind,
       quad.n = 30, verbose = TRUE
     )
     p.species.list.zibr[[spe]] <- est$joint.p

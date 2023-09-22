@@ -5,26 +5,26 @@
 \title{Fit zero-inflated beta regression with random effects}
 \usage{
 zibr(
-  logistic.cov,
-  beta.cov,
+  logistic_cov,
+  beta_cov,
   Y,
-  subject.ind,
-  time.ind,
+  subject_ind,
+  time_ind,
   component.wise.test = TRUE,
   quad.n = 30,
   verbose = FALSE
 )
 }
 \arguments{
-\item{logistic.cov}{the covariates in logistic component}
+\item{logistic_cov}{the covariates in logistic component}
 
-\item{beta.cov}{the covariates in beta component}
+\item{beta_cov}{the covariates in beta component}
 
 \item{Y}{the response variable in the regression model}
 
-\item{subject.ind}{the variable for subject IDs}
+\item{subject_ind}{the variable for subject IDs}
 
-\item{time.ind}{the variable for time points}
+\item{time_ind}{the variable for time points}
 
 \item{component.wise.test}{whether to perform component wise test.
 If true, ZIBR will calculate pvalues for logistic and beta component respectively.}
@@ -66,8 +66,8 @@ sim <- simulate_zero_inflated_beta_random_effect_data(
 )
 ## run zibr on the simulated data
 zibr_fit <- zibr(
-  logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
-  subject.ind = sim$subject.ind, time.ind = sim$time.ind
+  logistic_cov = sim$X, beta_cov = sim$Z, Y = sim$Y,
+  subject_ind = sim$subject.ind, time_ind = sim$time.ind
 )
 zibr_fit
 }

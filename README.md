@@ -30,14 +30,14 @@ library(ZIBR)
 ## Basic Usage
 
 ```r
-zibr_fit <- zibr(logistic.cov=logistic.cov,beta.cov=beta.cov,Y=Y,subject.ind=subject.ind,time.ind=time.ind)
+zibr_fit <- zibr(logistic_cov=logistic_cov,beta_cov=beta_cov,Y=Y,subject_ind=subject_ind,time_ind=time_ind)
 ```
 
-- **logistic.cov**: covariates for the logistic component. Rows: samples. Columns: covariates.  
-- **beta.cov**: covariates for the Beta component. Rows: samples. Columns: covariates.  
+- **logistic_cov**: covariates for the logistic component. Rows: samples. Columns: covariates.  
+- **beta_cov**: covariates for the Beta component. Rows: samples. Columns: covariates.  
 - **Y**: the response variable (i.e the bacterial relative abundance). It is a vector with values in [0,1).  
-- **subject.ind**: the variable with subject IDs.   
-- **time.ind**: the variable with time points.   
+- **subject_ind**: the variable with subject IDs.   
+- **time_ind**: the variable with time points.   
 
 The ordering of the samples in the above matrix or vectors must be consistent.
 

@@ -23,11 +23,11 @@ real_expected <- list(
 )
 
 test_that("zibr main function works on package data", {
-  zibr.fit <- zibr(
-    logistic.cov = data.frame(Treatment = ibd$Treatment),
-    beta.cov = data.frame(Treatment = ibd$Treatment),
-    Y = ibd$Abundance, subject.ind = ibd$Subject,
-    time.ind = ibd$Time
+  zibr_fit <- zibr(
+    logistic_cov = data.frame(Treatment = ibd$Treatment),
+    beta_cov = data.frame(Treatment = ibd$Treatment),
+    Y = ibd$Abundance, subject_ind = ibd$Subject,
+    time_ind = ibd$Time
   )
 
   expected_names <- c("logistic.est.table",
@@ -37,8 +37,8 @@ test_that("zibr main function works on package data", {
                       "beta.v.est",
                       "loglikelihood",
                       "joint.p")
-  expect_equal(names(zibr.fit), expected_names)
-  expect_equal(zibr.fit, real_expected, tolerance = 1e-3)
+  expect_equal(names(zibr_fit), expected_names)
+  expect_equal(zibr_fit, real_expected, tolerance = 1e-3)
 })
 
 set.seed(19683)
@@ -103,21 +103,21 @@ sim_expected_cov <- list(
 )
 
 test_that("zibr main function works on simulated data", {
-  zibr.fit <- zibr(logistic.cov = sim$X,
-                   beta.cov = sim$Z,
+  zibr_fit <- zibr(logistic_cov = sim$X,
+                   beta_cov = sim$Z,
                    Y = sim$Y,
-                   subject.ind = sim$subject.ind,
-                   time.ind = sim$time.ind)
+                   subject_ind = sim$subject.ind,
+                   time_ind = sim$time.ind)
 
-  expect_equal(zibr.fit, sim_expected, tolerance = 1e-3)
+  expect_equal(zibr_fit, sim_expected, tolerance = 1e-3)
 })
 
 test_that("zibr main function works on simulated data with same covariates", {
-  zibr.fit <- zibr(logistic.cov = sim$X,
-                   beta.cov = sim$X,
+  zibr_fit <- zibr(logistic_cov = sim$X,
+                   beta_cov = sim$X,
                    Y = sim$Y,
-                   subject.ind = sim$subject.ind,
-                   time.ind = sim$time.ind)
+                   subject_ind = sim$subject.ind,
+                   time_ind = sim$time.ind)
 
-  expect_equal(zibr.fit, sim_expected_cov, tolerance = 1e-3)
+  expect_equal(zibr_fit, sim_expected_cov, tolerance = 1e-3)
 })
