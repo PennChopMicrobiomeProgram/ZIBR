@@ -30,7 +30,7 @@ library(ZIBR)
 ## Basic Usage
 
 ```r
-zibr.fit <- zibr(logistic.cov=logistic.cov,beta.cov=beta.cov,Y=Y,subject.ind=subject.ind,time.ind=time.ind)
+zibr_fit <- zibr(logistic.cov=logistic.cov,beta.cov=beta.cov,Y=Y,subject.ind=subject.ind,time.ind=time.ind)
 ```
 
 - **logistic.cov**: covariates for the logistic component. Rows: samples. Columns: covariates.  
@@ -44,7 +44,7 @@ The ordering of the samples in the above matrix or vectors must be consistent.
 The zibr function will return the following results
 
 ```r
-zibr.fit
+zibr_fit
 ```
 
 - **logistic.est.table**: the estimated coefficients for logistic component.  

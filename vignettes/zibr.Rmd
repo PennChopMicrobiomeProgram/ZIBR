@@ -58,21 +58,21 @@ The simulation function returns the the bacterial abundance (Y) simulated accord
 
 We can run the zibr function to fit the zero-inflated beta random effect model on the simulated data.
 ```{r}
-zibr.fit <- zibr(
+zibr_fit <- zibr(
   logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
   subject.ind = sim$subject.ind, time.ind = sim$time.ind
 )
-zibr.fit
+zibr_fit
 ```
 
 If we use the same covariates for logistic and beta components, ZIBR can jointly test the covariate in both components. In the following example, we use the same covariate X in both components. We can obtain the ```joint.p``` as the pvalues of the joint test.  
 
 ```{r}
-zibr.fit <- zibr(
+zibr_fit <- zibr(
   logistic.cov = sim$X, beta.cov = sim$X, Y = sim$Y,
   subject.ind = sim$subject.ind, time.ind = sim$time.ind
 )
-zibr.fit
+zibr_fit
 ```
 
 ## Real Data
@@ -90,13 +90,13 @@ The current model can not handle missing data. That is, each subject must have t
 We can run the zibr function to the real data. Here, I'm interested in comparing the two treatments and use treatment as the only covariate in both logistic and beta component. Depending on the scientific questions you are interested in, you can also include time and treament-time interaction in the covariates. 
 
 ```{r}
-zibr.fit <- zibr(
+zibr_fit <- zibr(
   logistic.cov = data.frame(Treatment = ibd$Treatment),
   beta.cov = data.frame(Treatment = ibd$Treatment),
   Y = ibd$Abundance, subject.ind = ibd$Subject,
   time.ind = ibd$Time
 )
-zibr.fit
+zibr_fit
 ```
 
 Neither of the logsitic or beta component show significant pvalues. This indicates the abundance of this genus is not different between the two treatments, considering all time points.
