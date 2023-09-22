@@ -30,3 +30,13 @@ test_that("simulate_logistic_data works", {
 
   expect_equal(res, expected_lre_fit, tolerance = 1e-3)
 })
+
+test_that("generate_gaussian_quad_points returns properly shaped data", {
+  # Should default to 30 if not provided or not one of 10, 20, 30, 50 or 100
+  expect_equal(generate_gaussian_quad_points(), generate_gaussian_quad_points(15))
+  expect_length(generate_gaussian_quad_points(10)[["nodes"]], 10)
+  expect_length(generate_gaussian_quad_points(20)[["nodes"]], 20)
+  expect_length(generate_gaussian_quad_points(30)[["nodes"]], 30)
+  expect_length(generate_gaussian_quad_points(50)[["nodes"]], 50)
+  expect_length(generate_gaussian_quad_points(100)[["nodes"]], 100)
+})
