@@ -3,7 +3,7 @@ simulate_beta_random_effect_data <- function(subject_n = 50, time_n = 5, v = 2,
                                              beta = as.matrix(c(-0.5, -0.5, 0.5)),
                                              Z = NA, s2 = 1, sim_seed = 100) {
   #### Beta regression
-  if (length(NA) == 1 & any(is.na(Z))) {
+  if (length(NA) == 1 && any(is.na(Z))) {
     set.seed(sim_seed * 5000 + 10)
     Z <- as.matrix(data.frame(
       log.Time = as.matrix(log(rep(seq(1, time_n), subject_n))),
@@ -19,7 +19,10 @@ simulate_beta_random_effect_data <- function(subject_n = 50, time_n = 5, v = 2,
   c <- as.matrix(rnorm(subject_n, mean = 0, sd = s2))
   c_rep <- as.matrix(as.vector(matrix(c, nrow = time_n, ncol = length(c), byrow = TRUE)))
   #####
-  subject_ind <- as.vector(matrix(paste("Subject_", seq(1, subject_n), sep = ""), nrow = time_n, ncol = subject_n, byrow = TRUE))
+  subject_ind <- as.vector(matrix(paste("Subject_", seq(1, subject_n), sep = ""),
+                                  nrow = time_n,
+                                  ncol = subject_n,
+                                  byrow = TRUE))
   time_ind <- rep(seq(1, time_n), subject_n)
   ######
   z_aug <- cbind(intersept = 1, Z)

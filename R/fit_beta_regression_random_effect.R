@@ -49,7 +49,7 @@ fit_beta_random_effect <- function(Z = Z, Y = Y,
   Z <- as.matrix(Z)
   Y <- as.matrix(Y)
   if (is.null(colnames(Z))) {
-    colnames(Z) <- paste("var", 1:ncol(Z), sep = "")
+    colnames(Z) <- paste("var", seq_len(ncol(Z)), sep = "")
   }
   Z.aug <- cbind(intersept = 1, Z)
   ######
@@ -60,7 +60,10 @@ fit_beta_random_effect <- function(Z = Z, Y = Y,
   #############
   subject.n <- length(unique(subject.ind))
   time.n <- length(unique(time.ind))
-  prod.mat <- matrix(rep(c(rep(1, time.n), rep(0, subject.n * time.n)), subject.n)[1:(subject.n^2 * time.n)], byrow = TRUE, nrow = subject.n, ncol = subject.n * time.n)
+  prod.mat <- matrix(rep(c(rep(1, time.n), rep(0, subject.n * time.n)), subject.n)[1:(subject.n^2 * time.n)],
+                     byrow = TRUE,
+                     nrow = subject.n,
+                     ncol = subject.n * time.n)
   #############
   #### generate quad points
   gherm <- generate_gaussian_quad_points(quad_n = quad.n)
@@ -98,7 +101,7 @@ fit_beta_random_effect <- function(Z = Z, Y = Y,
   est.table[, "Estimate"] <- beta.est
   ########################
   ####### H0
-  for (test.i in 1:ncol(Z.aug)) {
+  for (test.i in seq_len(ncol(Z.aug))) {
     Z.test.coeff.index <- rep(FALSE, ncol(Z.aug))
     Z.test.coeff.index[test.i] <- TRUE
     opt.H0 <- nlminb(

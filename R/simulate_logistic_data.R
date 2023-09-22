@@ -17,7 +17,10 @@ simulate_logistic_data <- function() {
   b <- as.matrix(rnorm(subject_n, mean = 0, sd = s1))
   b_rep <- as.matrix(as.vector(matrix(b, nrow = time_n, ncol = length(b), byrow = TRUE)))
   #####
-  subject_ind <- as.vector(matrix(paste("Subject_", seq(1, subject_n), sep = ""), nrow = time_n, ncol = subject_n, byrow = TRUE))
+  subject_ind <- as.vector(matrix(paste("Subject_", seq(1, subject_n), sep = ""),
+                                  nrow = time_n,
+                                  ncol = subject_n,
+                                  byrow = TRUE))
   time_ind <- rep(seq(1, time_n), subject_n)
   ######
   x_aug <- cbind(interespt = 1, X)

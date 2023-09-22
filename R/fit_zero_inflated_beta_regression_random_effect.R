@@ -48,17 +48,20 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
   Z <- as.matrix(Z)
   Y <- as.matrix(Y)
   if (is.null(colnames(X))) {
-    colnames(X) <- paste("var", 1:ncol(X), sep = "")
+    colnames(X) <- paste("var", seq_len(ncol(X)), sep = "")
   }
   if (is.null(colnames(Z))) {
-    colnames(Z) <- paste("var", 1:ncol(Z), sep = "")
+    colnames(Z) <- paste("var", seq_len(ncol(Z)), sep = "")
   }
   X.aug <- cbind(intersept = 1, X)
   Z.aug <- cbind(intersept = 1, Z)
   #############
   subject.n <- length(unique(subject.ind))
   time.n <- length(unique(time.ind))
-  prod.mat <- matrix(rep(c(rep(1, time.n), rep(0, subject.n * time.n)), subject.n)[1:(subject.n^2 * time.n)], byrow = TRUE, nrow = subject.n, ncol = subject.n * time.n)
+  prod.mat <- matrix(rep(c(rep(1, time.n), rep(0, subject.n * time.n)), subject.n)[1:(subject.n^2 * time.n)],
+                     byrow = TRUE,
+                     nrow = subject.n,
+                     ncol = subject.n * time.n)
   #############
   #### generate quad points
   gherm <- generate_gaussian_quad_points(quad_n = quad.n)
@@ -139,7 +142,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
   }
   #########################
   ########################
-  if (!joint.test & component.wise.test) {
+  if (!joint.test && component.wise.test) {
     return(list(
       logistic.est.table = logistic.fit$est.table,
       logistic.s1.est = logistic.fit$s1.est,
@@ -150,7 +153,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
       joint.p = NA
     ))
   }
-  if (joint.test & component.wise.test) {
+  if (joint.test && component.wise.test) {
     return(list(
       logistic.est.table = logistic.fit$est.table,
       logistic.s1.est = logistic.fit$s1.est,
@@ -161,7 +164,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
       joint.p = joint.p
     ))
   }
-  if (joint.test & !component.wise.test) {
+  if (joint.test && !component.wise.test) {
     return(list(
       logistic.est.table = NA,
       logistic.s1.est = NA,

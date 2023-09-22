@@ -39,7 +39,7 @@ fit_logistic_random_effect <- function(X = X, Y = Y,
   X <- as.matrix(X)
   Y <- as.matrix(Y)
   if (is.null(colnames(X))) {
-    colnames(X) <- paste("var", 1:ncol(X), sep = "")
+    colnames(X) <- paste("var", seq_len(ncol(X)), sep = "")
   }
   X.aug <- cbind(intersept = 1, X)
   ######
@@ -50,7 +50,10 @@ fit_logistic_random_effect <- function(X = X, Y = Y,
   #############
   subject.n <- length(unique(subject.ind))
   time.n <- length(unique(time.ind))
-  prod.mat <- matrix(rep(c(rep(1, time.n), rep(0, subject.n * time.n)), subject.n)[1:(subject.n^2 * time.n)], byrow = TRUE, nrow = subject.n, ncol = subject.n * time.n)
+  prod.mat <- matrix(rep(c(rep(1, time.n), rep(0, subject.n * time.n)), subject.n)[1:(subject.n^2 * time.n)],
+                     byrow = TRUE,
+                     nrow = subject.n,
+                     ncol = subject.n * time.n)
   #############
   #### generate quad points
   gherm <- generate_gaussian_quad_points(quad_n = quad.n)
@@ -88,7 +91,7 @@ fit_logistic_random_effect <- function(X = X, Y = Y,
   est.table[, "Estimate"] <- alpha.est
   ########################
   ####### H0
-  for (test.i in 1:ncol(X.aug)) {
+  for (test.i in seq_len(ncol(X.aug))) {
     X.test.coeff.index <- rep(FALSE, ncol(X.aug))
     X.test.coeff.index[test.i] <- TRUE
     opt.H0 <- nlminb(

@@ -26,7 +26,8 @@ zibr(
 
 \item{time.ind}{the variable for time points}
 
-\item{component.wise.test}{whether to perform component wise test. If true, ZIBR will calculate pvalues for logistic and beta component respectively.}
+\item{component.wise.test}{whether to perform component wise test.
+If true, ZIBR will calculate pvalues for logistic and beta component respectively.}
 
 \item{quad.n}{Gaussian quadrature points}
 

@@ -11,7 +11,7 @@ generate_gaussian_quad_points(quad_n = 30)
 }
 \value{
 a structure with a named list
-\itemize {
+\itemize{
   \item nodes a vector of nodes
   \item weights a vector of weights for nodes
 }

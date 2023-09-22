@@ -39,7 +39,7 @@ simulate_zero_inflated_beta_random_effect_data <- function(subject_n = 50, time_
                                                            X = NA, Z = NA,
                                                            s1 = 0.2, s2 = 0.2, sim_seed = 100) {
   ######
-  if (length(NA) == 1 & any(is.na(X))) {
+  if (length(NA) == 1 && any(is.na(X))) {
     set.seed(sim_seed * 5000 + 10)
     X <- as.matrix(data.frame(
       log.Time = as.matrix(log(rep(seq(1, time_n), subject_n))),
@@ -52,7 +52,7 @@ simulate_zero_inflated_beta_random_effect_data <- function(subject_n = 50, time_
     X <- as.matrix(X)
     colnames(X) <- paste("var", seq(1, ncol(X)), sep = "")
   }
-  if (length(NA) == 1 & any(is.na(Z))) {
+  if (length(NA) == 1 && any(is.na(Z))) {
     Z <- X
   }
 
@@ -64,7 +64,10 @@ simulate_zero_inflated_beta_random_effect_data <- function(subject_n = 50, time_
   c <- as.matrix(rnorm(subject_n, mean = 0, sd = s2))
   c.rep <- as.matrix(as.vector(matrix(c, nrow = time_n, ncol = length(c), byrow = TRUE)))
   #####
-  subject.ind <- as.vector(matrix(paste("Subject_", seq(1, subject_n), sep = ""), nrow = time_n, ncol = subject_n, byrow = TRUE))
+  subject.ind <- as.vector(matrix(paste("Subject_", seq(1, subject_n), sep = ""),
+                                  nrow = time_n,
+                                  ncol = subject_n,
+                                  byrow = TRUE))
   time.ind <- rep(seq(1, time_n), subject_n)
   ######
   X.aug <- cbind(interespt = 1, X)
