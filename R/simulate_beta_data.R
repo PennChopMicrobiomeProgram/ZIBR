@@ -1,5 +1,12 @@
 #' Simulate beta data
 #'
+#' @param subject_n the number of subjects
+#' @param time_n the number of time points
+#' @param v FILL
+#' @param beta FILL
+#' @param Z FILL
+#' @param s2 FILL
+#' @param sim_seed the random seed with which to simulate the data
 #' @return a named list
 #' \itemize{
 #'   \item Y

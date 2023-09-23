@@ -56,6 +56,7 @@ cal_zibeta_loglik <- function(para,
 #' }
 #'
 #' @importFrom stats nlminb pchisq
+#' @importFrom statmod gauss.quad
 fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
                                                  subject.ind = subject.ind, time.ind = time.ind,
                                                  component.wise.test = TRUE,
@@ -81,7 +82,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
                      ncol = subject.n * time.n)
 
   #### generate quad points
-  gherm <- statmod::gauss.quad(quad.n, kind = "hermite")
+  gherm <- gauss.quad(quad.n, kind = "hermite")
   gh.weights <- matrix(rep(gherm$weights, subject.n), nrow = subject.n, byrow = TRUE)
   gh.nodes <- matrix(rep(gherm$nodes, subject.n * time.n),
     nrow = subject.n * time.n, byrow = TRUE

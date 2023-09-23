@@ -18,11 +18,11 @@ test_that("simulate_beta_data works", {
   # betareg can not fit random effect model so set the s2 to a small value (small random effect)
   tdata <- data.frame(Y = beta_data$Y, beta_data$Z, SID = beta_data$subject_ind)
   gy <- betareg::betareg(beta_data$Y ~ log.Time + as.factor(Treatment), data = tdata, type = "ML")
-  print(summary(gy))
+  #print(summary(gy))
   gy <- betareg::betareg(beta_data$Y ~ log.Time + as.factor(Treatment), data = tdata, type = "BC")
-  print(summary(gy))
+  #print(summary(gy))
   gy <- betareg::betareg(beta_data$Y ~ log.Time + as.factor(Treatment), data = tdata, type = "BR")
-  print(summary(gy))
+  #print(summary(gy))
 
   res <- fit_beta_random_effect(Z = beta_data$Z,
                                 Y = beta_data$Y,
@@ -36,15 +36,12 @@ test_that("simulate_beta_data works", {
 
 expected_lre_fit <- list(
   est.table = structure(
-    c(-0.0628812115036638, 0.542798394793223, -1.40658808189955,
-      0.906031339206661, 0.17038465174889, 0.0147054130400252),
+    c(0.306795205483351, 0.280454254105502,
+      -0.667159092633291, 0.431194361789462, 0.266160176079596, 0.123214729652536),
     .Dim = 3:2,
-    .Dimnames = list(
-      c("intersept", "log.Time", "Treatment"),
-      c("Estimate", "Pvalue")
-    )
+    .Dimnames = list(c("intersept", "log.Time", "Treatment"), c("Estimate", "Pvalue"))
   ),
-  s1.est = 0.704340053310094
+  s1.est = 1.12114408844058
 )
 
 test_that("simulate_logistic_data works", {
@@ -62,6 +59,7 @@ test_that("simulate_logistic_data works", {
                                     Y = logistic_data$Y,
                                     subject.ind = logistic_data$subject_ind,
                                     time.ind = logistic_data$time_ind)
+  dput(res)
 
   expect_equal(res, expected_lre_fit, tolerance = 1e-3)
 })

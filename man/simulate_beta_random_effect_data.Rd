@@ -14,6 +14,21 @@ simulate_beta_random_effect_data(
   sim_seed = 100
 )
 }
+\arguments{
+\item{subject_n}{the number of subjects}
+
+\item{time_n}{the number of time points}
+
+\item{v}{FILL}
+
+\item{beta}{FILL}
+
+\item{Z}{FILL}
+
+\item{s2}{FILL}
+
+\item{sim_seed}{the random seed with which to simulate the data}
+}
 \value{
 a named list
 \itemize{

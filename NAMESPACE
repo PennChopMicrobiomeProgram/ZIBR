@@ -2,6 +2,7 @@
 
 export(simulate_zero_inflated_beta_random_effect_data)
 export(zibr)
+importFrom(statmod,gauss.quad)
 importFrom(stats,nlminb)
 importFrom(stats,pchisq)
 importFrom(stats,rbeta)

@@ -4,7 +4,24 @@
 \alias{simulate_logistic_data}
 \title{Simulate logistic data}
 \usage{
-simulate_logistic_data()
+simulate_logistic_data(
+  subject_n = 50,
+  time_n = 5,
+  alpha = as.matrix(c(0, 0.5, -1)),
+  s1 = 0.5,
+  sim_seed = 100
+)
+}
+\arguments{
+\item{subject_n}{the number of subjects}
+
+\item{time_n}{the number of time points}
+
+\item{alpha}{FILL}
+
+\item{s1}{FILL}
+
+\item{sim_seed}{the random seed with which to simulate the data}
 }
 \value{
 a named list

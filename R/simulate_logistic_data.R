@@ -1,5 +1,10 @@
 #' Simulate logistic data
 #'
+#' @param subject_n the number of subjects
+#' @param time_n the number of time points
+#' @param alpha FILL
+#' @param s1 FILL
+#' @param sim_seed the random seed with which to simulate the data
 #' @return a named list
 #' \itemize{
 #'   \item X
@@ -10,14 +15,10 @@
 #' }
 #'
 #' @importFrom stats rnorm rbinom
-simulate_logistic_data <- function() {
+simulate_logistic_data <- function(subject_n = 50, time_n = 5,
+                                   alpha = as.matrix(c(0, 0.5, -1)),
+                                   s1 = 0.5, sim_seed = 100) {
   #### logistic regression
-  sim_seed <- 18642
-  time_n <- 5
-  subject_n <- 20
-  s1 <- 0.5
-  alpha <- as.matrix(c(0, 0.5, -1))
-
   set.seed(sim_seed + 10)
   X <- as.matrix(data.frame(
     log.Time = as.matrix(log(rep(seq(1, time_n), subject_n))),
