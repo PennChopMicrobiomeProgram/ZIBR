@@ -29,21 +29,38 @@ cal_zibeta_loglik <- function(para,
     gh.weights = gh.weights, gh.nodes = gh.nodes,
     quad.n = quad.n
   )
-  return(logistic.logLike + beta.logLike)
+
+  logistic.logLike + beta.logLike
 }
 
-
-
-#######################################
-
-#######################################
+#' Fit zero inflated beta random effect
+#'
+#' @param X FILL
+#' @param Z FILL
+#' @param Y FILL
+#' @param subject.ind the subject index
+#' @param time.ind the time index
+#' @param component.wise.test boolean to run component-wise test
+#' @param joint.test boolean to run joint test
+#' @param quad.n number of points in gaussian quadrature
+#' @param verbose a boolean to enable more output
+#' @return a named list
+#' \itemize{
+#'   \item logistic.est.table
+#'   \item logistic.s1.est
+#'   \item beta.est.table
+#'   \item beta.s2.est
+#'   \item beta.v.est
+#'   \item loglikelihood
+#'   \item joint.p
+#' }
+#'
 #' @importFrom stats nlminb pchisq
 fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
                                                  subject.ind = subject.ind, time.ind = time.ind,
                                                  component.wise.test = TRUE,
                                                  joint.test = TRUE,
                                                  quad.n = 30, verbose = FALSE) {
-  ######
   X <- as.matrix(X)
   Z <- as.matrix(Z)
   Y <- as.matrix(Y)
@@ -55,21 +72,21 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
   }
   X.aug <- cbind(intersept = 1, X)
   Z.aug <- cbind(intersept = 1, Z)
-  #############
+
   subject.n <- length(unique(subject.ind))
   time.n <- length(unique(time.ind))
   prod.mat <- matrix(rep(c(rep(1, time.n), rep(0, subject.n * time.n)), subject.n)[1:(subject.n^2 * time.n)],
                      byrow = TRUE,
                      nrow = subject.n,
                      ncol = subject.n * time.n)
-  #############
+
   #### generate quad points
   gherm <- statmod::gauss.quad(quad.n, kind = "hermite")
   gh.weights <- matrix(rep(gherm$weights, subject.n), nrow = subject.n, byrow = TRUE)
   gh.nodes <- matrix(rep(gherm$nodes, subject.n * time.n),
     nrow = subject.n * time.n, byrow = TRUE
   )
-  ############
+
   ###### estimate and test each parameter
   if (component.wise.test) {
     logistic.fit <- fit_logistic_random_effect(
@@ -82,7 +99,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
       quad.n = quad.n, verbose = verbose
     )
   }
-  ##################################
+
   ##### jointly test each variable in logistic and beta component
   if (joint.test) {
     ##### H1
@@ -140,39 +157,26 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
     ## remove the 'overall'
     joint.p <- joint.p[-1]
   }
-  #########################
-  ########################
-  if (!joint.test && component.wise.test) {
-    return(list(
-      logistic.est.table = logistic.fit$est.table,
-      logistic.s1.est = logistic.fit$s1.est,
-      beta.est.table = beta.fit$est.table,
-      beta.s2.est = beta.fit$s2.est,
-      beta.v.est = beta.fit$v.est,
-      loglikelihood = NA,
-      joint.p = NA
-    ))
+
+  return_values <- list(logistic.est.table = NA,
+                        logistic.s1.est = NA,
+                        beta.est.table = NA,
+                        beta.s2.est = NA,
+                        beta.v.est = NA,
+                        loglikelihood = NA,
+                        joint.p = NA)
+
+  if (component.wise.test) {
+    return_values[["logistic.est.table"]] <- logistic.fit$est.table
+    return_values[["logistic.s1.est"]] <- logistic.fit$s1.est
+    return_values[["beta.est.table"]] <- beta.fit$est.table
+    return_values[["beta.s2.est"]] <- beta.fit$s2.est
+    return_values[["beta.v.est"]] <- beta.fit$v.est
   }
-  if (joint.test && component.wise.test) {
-    return(list(
-      logistic.est.table = logistic.fit$est.table,
-      logistic.s1.est = logistic.fit$s1.est,
-      beta.est.table = beta.fit$est.table,
-      beta.s2.est = beta.fit$s2.est,
-      beta.v.est = beta.fit$v.est,
-      loglikelihood = -opt.H1$objective,
-      joint.p = joint.p
-    ))
+  if (joint.test) {
+    return_values[["loglikelihood"]] <- -opt.H1$objective
+    return_values[["joint.p"]] <- joint.p
   }
-  if (joint.test && !component.wise.test) {
-    return(list(
-      logistic.est.table = NA,
-      logistic.s1.est = NA,
-      beta.est.table = NA,
-      beta.s2.est = NA,
-      beta.v.est = NA,
-      loglikelihood = -opt.H1$objective,
-      joint.p = joint.p
-    ))
-  }
+
+  return_values
 }

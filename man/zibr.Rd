@@ -10,7 +10,7 @@ zibr(
   Y,
   subject_ind,
   time_ind,
-  component.wise.test = TRUE,
+  component_wise_test = TRUE,
   quad.n = 30,
   verbose = FALSE
 )
@@ -26,7 +26,7 @@ zibr(
 
 \item{time_ind}{the variable for time points}
 
-\item{component.wise.test}{whether to perform component wise test.
+\item{component_wise_test}{whether to perform component wise test.
 If true, ZIBR will calculate pvalues for logistic and beta component respectively.}
 
 \item{quad.n}{Gaussian quadrature points}

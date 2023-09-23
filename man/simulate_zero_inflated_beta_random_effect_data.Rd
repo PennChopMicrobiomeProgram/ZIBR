@@ -39,23 +39,18 @@ simulate_zero_inflated_beta_random_effect_data(
 \item{sim_seed}{the random seed}
 }
 \value{
-Y the bacterial abundance generated from the model
-
-X the covariates in logistic component
-
-Z the covariates in beta component
-
-alpha the coefficients in logistic component
-
-beta the coefficients in beta component
-
-s1 the stardard deviation of random effect in logistic component
-
-s2 the stardard deviation of random effect in beta component
-
-subject.ind the IDs for each subject
-
-time.ind time points
+a named list
+\itemize{
+  \item Y the bacterial abundance generated from the model
+  \item X the covariates in logistic component
+  \item Z the covariates in beta component
+  \item alpha the coefficients in logistic component
+  \item beta the coefficients in beta component
+  \item s1 the stardard deviation of random effect in logistic component
+  \item s2 the stardard deviation of random effect in beta component
+  \item subject.ind the IDs for each subject
+  \item time.ind time points
+}
 }
 \description{
 Simulate data according to zero-inflated beta random effects model

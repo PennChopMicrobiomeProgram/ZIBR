@@ -1,3 +1,18 @@
+#' Simulate beta data
+#'
+#' @return a named list
+#' \itemize{
+#'   \item Y
+#'   \item Z
+#'   \item c
+#'   \item u
+#'   \item v
+#'   \item beta
+#'   \item s2
+#'   \item subject_ind
+#'   \item time_ind
+#' }
+#'
 #' @importFrom stats rnorm rbeta
 simulate_beta_random_effect_data <- function(subject_n = 50, time_n = 5, v = 2,
                                              beta = as.matrix(c(-0.5, -0.5, 0.5)),
@@ -18,21 +33,20 @@ simulate_beta_random_effect_data <- function(subject_n = 50, time_n = 5, v = 2,
   set.seed(sim_seed * 5000 + 1)
   c <- as.matrix(rnorm(subject_n, mean = 0, sd = s2))
   c_rep <- as.matrix(as.vector(matrix(c, nrow = time_n, ncol = length(c), byrow = TRUE)))
-  #####
+
   subject_ind <- as.vector(matrix(paste("Subject_", seq(1, subject_n), sep = ""),
                                   nrow = time_n,
                                   ncol = subject_n,
                                   byrow = TRUE))
   time_ind <- rep(seq(1, time_n), subject_n)
-  ######
+
   z_aug <- cbind(intersept = 1, Z)
-  # browser()
+
   logit_u <- z_aug %*% beta + c_rep
-  ######
+
   u <- 1 / (1 + exp(-logit_u))
   ## v is the phi
 
-  ######
   set.seed(sim_seed * 5000 + 4)
   Y <- rbeta(subject_n * time_n, shape1 = u * v, shape2 = (1 - u) * v)
   if (any(Y > 1 - 10^(-6))) {

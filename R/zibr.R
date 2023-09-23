@@ -5,7 +5,7 @@
 #' @param Y the response variable in the regression model
 #' @param subject_ind the variable for subject IDs
 #' @param time_ind the variable for time points
-#' @param component.wise.test whether to perform component wise test.
+#' @param component_wise_test whether to perform component wise test.
 #'   If true, ZIBR will calculate pvalues for logistic and beta component respectively.
 #' @param quad.n Gaussian quadrature points
 #' @param verbose print the fitting process
@@ -42,7 +42,7 @@ zibr <- function(logistic_cov,
                  Y,
                  subject_ind,
                  time_ind,
-                 component.wise.test = TRUE,
+                 component_wise_test = TRUE,
                  quad.n = 30,
                  verbose = FALSE) {
   Y <- as.matrix(Y)
