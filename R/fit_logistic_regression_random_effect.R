@@ -2,7 +2,6 @@ cal_logistic_loglik <- function(para, X.aug, Y, subject.n, time.n,
                                 prod.mat,
                                 X.test.coeff.index,
                                 gh.weights, gh.nodes, quad.n) {
-  ######################################
   #### given the values of random effect b
   #### calculate the probablity p
   ## X.aug is (subject.n*time.n) X (number of covariates + 1)
@@ -24,44 +23,57 @@ cal_logistic_loglik <- function(para, X.aug, Y, subject.n, time.n,
   p[Y == 0, ] <- 1 - p[Y == 0, ]
   #### exp(log(A*B)) = exp(logA+logB)=A*B
   logL <- sum(log(rowSums(gh.weights / sqrt(pi) * exp(prod.mat %*% log(p)))))
-  return(-logL)
+
+  -logL
 }
 
 ### b <- array(c(1:250000, 1:250000),c(5000,5000,2))
 ### system.time(rs4 <- colSums(aperm(b, c(2,1,3))))
 
-#######################################
+#' Fit logisitic random effect
+#'
+#' @param X FILL
+#' @param Y FILL
+#' @param subject.ind the subject index
+#' @param time.ind the time index
+#' @param quad.n number of points in gaussian quadrature
+#' @param verbose a boolean to enable more output
+#' @return a named list
+#' \itemize{
+#'   \item est.table
+#'   \item s1.est
+#' }
+#'
 #' @importFrom stats nlminb pchisq
 fit_logistic_random_effect <- function(X = X, Y = Y,
                                        subject.ind = subject.ind, time.ind = time.ind,
                                        quad.n = 30, verbose = FALSE) {
-  ######
   X <- as.matrix(X)
   Y <- as.matrix(Y)
   if (is.null(colnames(X))) {
     colnames(X) <- paste("var", seq_len(ncol(X)), sep = "")
   }
   X.aug <- cbind(intersept = 1, X)
-  ######
+
   est.table <- matrix(NA,
     ncol = 2, nrow = ncol(X.aug),
     dimnames = list(colnames(X.aug), c("Estimate", "Pvalue"))
   )
-  #############
+
   subject.n <- length(unique(subject.ind))
   time.n <- length(unique(time.ind))
   prod.mat <- matrix(rep(c(rep(1, time.n), rep(0, subject.n * time.n)), subject.n)[1:(subject.n^2 * time.n)],
                      byrow = TRUE,
                      nrow = subject.n,
                      ncol = subject.n * time.n)
-  #############
+
   #### generate quad points
   gherm <- statmod::gauss.quad(quad.n, kind = "hermite")
   gh.weights <- matrix(rep(gherm$weights, subject.n), nrow = subject.n, byrow = TRUE)
   gh.nodes <- matrix(rep(gherm$nodes, subject.n * time.n),
     nrow = subject.n * time.n, byrow = TRUE
   )
-  #############
+
   #### re-order X,Y so that values belongs to the same subject are together
   #### need the values in this format for loglikelihood calculation
   gind <- sort(subject.ind, index.return = TRUE)$ix
@@ -70,7 +82,7 @@ fit_logistic_random_effect <- function(X = X, Y = Y,
   X.aug <- X.aug[gind, ]
   ##### H1: estimate all parameters
   X.test.coeff.index <- rep(FALSE, ncol(X.aug))
-  # browser()
+
   opt.H1 <- nlminb(
     start = c(1, rep(0, sum(!X.test.coeff.index))), ## s1,alpha
     objective = cal_logistic_loglik,
@@ -89,7 +101,7 @@ fit_logistic_random_effect <- function(X = X, Y = Y,
   s1.est <- opt.H1$par[1]
   alpha.est <- opt.H1$par[-1]
   est.table[, "Estimate"] <- alpha.est
-  ########################
+
   ####### H0
   for (test.i in seq_len(ncol(X.aug))) {
     X.test.coeff.index <- rep(FALSE, ncol(X.aug))
@@ -109,11 +121,10 @@ fit_logistic_random_effect <- function(X = X, Y = Y,
       control = list(trace = ifelse(verbose, 2, 0))
     )
 
-
     likelihodd.ratio <- -2 * (-opt.H0$objective - (-opt.H1$objective))
     LRT.p <- 1 - pchisq(likelihodd.ratio, df = 1)
     est.table[test.i, "Pvalue"] <- LRT.p
   }
 
-  return(list(est.table = est.table, s1.est = s1.est))
+  list(est.table = est.table, s1.est = s1.est)
 }

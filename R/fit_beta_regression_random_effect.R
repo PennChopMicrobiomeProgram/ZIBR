@@ -36,42 +36,55 @@ cal_beta_loglik <- function(para, Z.aug, Y, subject.n, time.n,
     )),
     na.rm = TRUE
   )
-  return(-logL)
+
+  -logL
 }
 
-
-#######################################
+#' Fit beta random effect
+#'
+#' @param Z FILL
+#' @param Y FILL
+#' @param subject.ind the subject index
+#' @param time.ind the time index
+#' @param quad.n number of points in gaussian quadrature
+#' @param verbose a boolean to enable more output
+#' @return a named list
+#' \itemize{
+#'   \item est.table
+#'   \item s2.est
+#'   \item v.est
+#' }
+#'
 #' @importFrom stats nlminb pchisq
 fit_beta_random_effect <- function(Z = Z, Y = Y,
                                    subject.ind = subject.ind, time.ind = time.ind,
                                    quad.n = 30, verbose = FALSE) {
-  ######
   Z <- as.matrix(Z)
   Y <- as.matrix(Y)
   if (is.null(colnames(Z))) {
     colnames(Z) <- paste("var", seq_len(ncol(Z)), sep = "")
   }
   Z.aug <- cbind(intersept = 1, Z)
-  ######
+
   est.table <- matrix(NA,
     ncol = 2, nrow = ncol(Z.aug),
     dimnames = list(colnames(Z.aug), c("Estimate", "Pvalue"))
   )
-  #############
+
   subject.n <- length(unique(subject.ind))
   time.n <- length(unique(time.ind))
   prod.mat <- matrix(rep(c(rep(1, time.n), rep(0, subject.n * time.n)), subject.n)[1:(subject.n^2 * time.n)],
                      byrow = TRUE,
                      nrow = subject.n,
                      ncol = subject.n * time.n)
-  #############
+
   #### generate quad points
   gherm <- statmod::gauss.quad(quad.n, kind = "hermite")
   gh.weights <- matrix(rep(gherm$weights, subject.n), nrow = subject.n, byrow = TRUE)
   gh.nodes <- matrix(rep(gherm$nodes, subject.n * time.n),
     nrow = subject.n * time.n, byrow = TRUE
   )
-  #################
+
   #### re-order Z,Y so that values belongs to the same subject are together
   #### need the values in this format for loglikelihood calculation
   gind <- sort(subject.ind, index.return = TRUE)$ix
@@ -99,7 +112,7 @@ fit_beta_random_effect <- function(Z = Z, Y = Y,
   v.est <- opt.H1$par[2]
   beta.est <- opt.H1$par[-(1:2)]
   est.table[, "Estimate"] <- beta.est
-  ########################
+
   ####### H0
   for (test.i in seq_len(ncol(Z.aug))) {
     Z.test.coeff.index <- rep(FALSE, ncol(Z.aug))
@@ -124,5 +137,5 @@ fit_beta_random_effect <- function(Z = Z, Y = Y,
     est.table[test.i, "Pvalue"] <- LRT.p
   }
 
-  return(list(est.table = est.table, s2.est = s2.est, v.est = v.est))
+  list(est.table = est.table, s2.est = s2.est, v.est = v.est)
 }
