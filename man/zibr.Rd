@@ -11,7 +11,7 @@ zibr(
   subject_ind,
   time_ind,
   component_wise_test = TRUE,
-  quad.n = 30,
+  quad_n = 30,
   verbose = FALSE
 )
 }
@@ -27,26 +27,23 @@ zibr(
 \item{time_ind}{the variable for time points}
 
 \item{component_wise_test}{whether to perform component wise test.
-If true, ZIBR will calculate pvalues for logistic and beta component respectively.}
+If true, ZIBR will calculate p-values for logistic and beta component respectively.}
 
-\item{quad.n}{Gaussian quadrature points}
+\item{quad_n}{Gaussian quadrature points}
 
 \item{verbose}{print the fitting process}
 }
 \value{
-logistic.est.table the estimated coefficients for logistic component.
-
-logistic.s1.est the estimated standard deviation for the random effect in the logistic component.
-
-beta.est.table the estimated coefficients for logistic component.
-
-beta.s2.est the estimated standard deviation for the random effect in the beta component.
-
-beta.v.est the estiamted dispersion parameter in the beta component.
-
-loglikelihood  the log likelihood of fitting zibr model on the data.
-
-joint.p  the pvalues for jointly testing each covariate in both logistic and beta component.
+a named list
+\itemize{
+  \item logistic_est_table - the estimated coefficients for logistic component.
+  \item logistic_s1_est - the estimated standard deviation for the random effect in the logistic component.
+  \item beta_est_table - the estimated coefficients for logistic component.
+  \item beta_s2_est - the estimated standard deviation for the random effect in the beta component.
+  \item beta_v_est - the estimated dispersion parameter in the beta component.
+  \item loglikelihood - the log likelihood of fitting ZIBR model on the data.
+  \item joint_p - the p-values for jointly testing each covariate in both logistic and beta component.
+}
 }
 \description{
 Fit zero-inflated beta regression with random effects

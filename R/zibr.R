@@ -6,16 +6,20 @@
 #' @param subject_ind the variable for subject IDs
 #' @param time_ind the variable for time points
 #' @param component_wise_test whether to perform component wise test.
-#'   If true, ZIBR will calculate pvalues for logistic and beta component respectively.
-#' @param quad.n Gaussian quadrature points
+#'   If true, ZIBR will calculate p-values for logistic and beta component respectively.
+#' @param quad_n Gaussian quadrature points
 #' @param verbose print the fitting process
-#' @return logistic.est.table the estimated coefficients for logistic component.
-#' @return logistic.s1.est the estimated standard deviation for the random effect in the logistic component.
-#' @return beta.est.table the estimated coefficients for logistic component.
-#' @return beta.s2.est the estimated standard deviation for the random effect in the beta component.
-#' @return beta.v.est the estiamted dispersion parameter in the beta component.
-#' @return loglikelihood  the log likelihood of fitting zibr model on the data.
-#' @return joint.p  the pvalues for jointly testing each covariate in both logistic and beta component.
+#' @return a named list
+#' \itemize{
+#'   \item logistic_est_table - the estimated coefficients for logistic component.
+#'   \item logistic_s1_est - the estimated standard deviation for the random effect in the logistic component.
+#'   \item beta_est_table - the estimated coefficients for logistic component.
+#'   \item beta_s2_est - the estimated standard deviation for the random effect in the beta component.
+#'   \item beta_v_est - the estimated dispersion parameter in the beta component.
+#'   \item loglikelihood - the log likelihood of fitting ZIBR model on the data.
+#'   \item joint_p - the p-values for jointly testing each covariate in both logistic and beta component.
+#' }
+#'
 #' @export
 #' @examples
 #' \dontrun{
@@ -43,7 +47,7 @@ zibr <- function(logistic_cov,
                  subject_ind,
                  time_ind,
                  component_wise_test = TRUE,
-                 quad.n = 30,
+                 quad_n = 30,
                  verbose = FALSE) {
   Y <- as.matrix(Y)
   #### check if Y is in [0,1)
@@ -70,16 +74,16 @@ zibr <- function(logistic_cov,
   #### check if time_ind are the same for each subject_ind
   fit <- fit_zero_inflated_beta_random_effect(
     X = logistic_cov, Z = beta_cov, Y = Y,
-    subject.ind = subject_ind, time.ind = time_ind, joint.test = joint.test
+    subject.ind = subject_ind, time.ind = time_ind, joint.test = joint.test, quad.n = quad_n
   )
 
   list(
-    logistic.est.table = fit$logistic.est.table,
-    logistic.s1.est = fit$logistic.s1.est,
-    beta.est.table = fit$beta.est.table,
-    beta.s2.est = fit$beta.s2.est,
-    beta.v.est = fit$beta.v.est,
+    logistic_est_table = fit$logistic.est.table,
+    logistic_s1_est = fit$logistic.s1.est,
+    beta_est_table = fit$beta.est.table,
+    beta_s2_est = fit$beta.s2.est,
+    beta_v_est = fit$beta.v.est,
     loglikelihood = fit$loglikelihood,
-    joint.p = fit$joint.p
+    joint_p = fit$joint.p
   )
 }

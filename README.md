@@ -47,12 +47,12 @@ The zibr function will return the following results
 zibr_fit
 ```
 
-- **logistic.est.table**: the estimated coefficients for logistic component.  
-- **logistic.s1.est**: the estimated standard deviation for the random effect in the logistic component.  
-- **beta.est.table**: the estimated coefficients for Beta component.  
-- **beta.s2.est**: the estimated standard deviation for the random effect in the Beta component.  
-- **beta.v.est**: the estiamted dispersion parameter in the Beta component.  
-- **joint.p**: the pvalues for jointly testing each covariate in both logistic and Beta component.  
+- **logistic_est_table**: the estimated coefficients for logistic component.  
+- **logistic_s1_est**: the estimated standard deviation for the random effect in the logistic component.  
+- **beta_est_table**: the estimated coefficients for Beta component.  
+- **beta_s2_est**: the estimated standard deviation for the random effect in the Beta component.  
+- **beta_v_est**: the estimated dispersion parameter in the Beta component.  
+- **joint_p**: the p-values for jointly testing each covariate in both logistic and Beta component.  
 
 ## Troubleshooting
 
