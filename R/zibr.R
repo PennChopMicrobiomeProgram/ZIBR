@@ -78,12 +78,12 @@ zibr <- function(logistic_cov,
   )
 
   list(
-    logistic_est_table = fit$logistic.est.table,
-    logistic_s1_est = fit$logistic.s1.est,
-    beta_est_table = fit$beta.est.table,
-    beta_s2_est = fit$beta.s2.est,
-    beta_v_est = fit$beta.v.est,
+    logistic_est_table = fit$logistic_est_table,
+    logistic_s1_est = fit$logistic_s1_est,
+    beta_est_table = fit$beta_est_table,
+    beta_s2_est = fit$beta_s2_est,
+    beta_v_est = fit$beta_v_est,
     loglikelihood = fit$loglikelihood,
-    joint_p = fit$joint.p
+    joint_p = fit$joint_p
   )
 }

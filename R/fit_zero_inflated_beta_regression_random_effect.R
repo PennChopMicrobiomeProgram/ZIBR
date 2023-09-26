@@ -46,13 +46,13 @@ cal_zibeta_loglik <- function(para,
 #' @param verbose a boolean to enable more output
 #' @return a named list
 #' \itemize{
-#'   \item logistic.est.table
-#'   \item logistic.s1.est
-#'   \item beta.est.table
-#'   \item beta.s2.est
-#'   \item beta.v.est
+#'   \item logistic_est_table
+#'   \item logistic_s1_est
+#'   \item beta_est_table
+#'   \item beta_s2_est
+#'   \item beta_v_est
 #'   \item loglikelihood
-#'   \item joint.p
+#'   \item joint_p
 #' }
 #'
 #' @importFrom stats nlminb pchisq
@@ -126,7 +126,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
       control = list(trace = ifelse(verbose, 2, 0))
     )
     ###### H0:set corresponding regression coefficients to zero, excluding intercept
-    joint.p <- rep(NA, ncol(X.aug))
+    joint_p <- rep(NA, ncol(X.aug))
     for (i in 2:ncol(X.aug)) {
       X.test.coeff.index <- rep(FALSE, ncol(X.aug))
       Z.test.coeff.index <- rep(FALSE, ncol(Z.aug))
@@ -152,31 +152,31 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
         control = list(trace = ifelse(verbose, 2, 0))
       )
       likelihodd.ratio <- -2 * (-opt.H0$objective - (-opt.H1$objective))
-      joint.p[i] <- 1 - pchisq(likelihodd.ratio, df = sum(X.test.coeff.index) + sum(Z.test.coeff.index))
+      joint_p[i] <- 1 - pchisq(likelihodd.ratio, df = sum(X.test.coeff.index) + sum(Z.test.coeff.index))
     }
-    names(joint.p) <- c("overall", colnames(X))
+    names(joint_p) <- c("overall", colnames(X))
     ## remove the 'overall'
-    joint.p <- joint.p[-1]
+    joint_p <- joint_p[-1]
   }
 
-  return_values <- list(logistic.est.table = NA,
-                        logistic.s1.est = NA,
-                        beta.est.table = NA,
-                        beta.s2.est = NA,
-                        beta.v.est = NA,
+  return_values <- list(logistic_est_table = NA,
+                        logistic_s1_est = NA,
+                        beta_est_table = NA,
+                        beta_s2_est = NA,
+                        beta_v_est = NA,
                         loglikelihood = NA,
-                        joint.p = NA)
+                        joint_p = NA)
 
   if (component_wise_test) {
-    return_values[["logistic.est.table"]] <- logistic.fit$est.table
-    return_values[["logistic.s1.est"]] <- logistic.fit$s1.est
-    return_values[["beta.est.table"]] <- beta.fit$est.table
-    return_values[["beta.s2.est"]] <- beta.fit$s2.est
-    return_values[["beta.v.est"]] <- beta.fit$v.est
+    return_values[["logistic_est_table"]] <- logistic.fit$est.table
+    return_values[["logistic_s1_est"]] <- logistic.fit$s1.est
+    return_values[["beta_est_table"]] <- beta.fit$est.table
+    return_values[["beta_s2_est"]] <- beta.fit$s2.est
+    return_values[["beta_v_est"]] <- beta.fit$v.est
   }
   if (joint_test) {
     return_values[["loglikelihood"]] <- -opt.H1$objective
-    return_values[["joint.p"]] <- joint.p
+    return_values[["joint_p"]] <- joint_p
   }
 
   return_values

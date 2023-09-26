@@ -39,13 +39,13 @@ fit_zero_inflated_beta_random_effect(
 \value{
 a named list
 \itemize{
-  \item logistic.est.table
-  \item logistic.s1.est
-  \item beta.est.table
-  \item beta.s2.est
-  \item beta.v.est
+  \item logistic_est_table
+  \item logistic_s1_est
+  \item beta_est_table
+  \item beta_s2_est
+  \item beta_v_est
   \item loglikelihood
-  \item joint.p
+  \item joint_p
 }
 }
 \description{
