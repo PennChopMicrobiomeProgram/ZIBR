@@ -235,7 +235,7 @@ for (spe in spe.all) {
       logistic_cov = X, beta_cov = Z, Y = Y,
       subject_ind = subject.ind,
       time_ind = time.ind,
-      quad.n = 30, verbose = TRUE
+      quad_n = 30, verbose = TRUE
     )
     p.species.list.zibr[[spe]] <- est$joint.p
   }
@@ -280,7 +280,7 @@ setdiff(
   p.species.zibr.adj[p.species.zibr.adj$Time < 0.05, "Species"]
 )
 setdiff(
-  p.species.lme.adj[p.species.zibr.adj$Time < 0.05, "Species"],
-  p.species.zibr.adj[p.species.lme.adj$Time < 0.05, "Species"]
+  p.species.lme.adj[p.species.lme.adj$Time < 0.05, "Species"],
+  p.species.zibr.adj[p.species.zibr.adj$Time < 0.05, "Species"]
 )
 ```
