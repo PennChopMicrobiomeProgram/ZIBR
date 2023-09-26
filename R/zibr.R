@@ -67,14 +67,14 @@ zibr <- function(logistic_cov,
   }
   #### if the colnames are the same, jointly test the two component
   if (identical(colnames(logistic_cov), colnames(beta_cov))) {
-    joint.test <- TRUE
+    joint_test <- TRUE
   } else {
-    joint.test <- FALSE
+    joint_test <- FALSE
   }
   #### check if time_ind are the same for each subject_ind
   fit <- fit_zero_inflated_beta_random_effect(
     X = logistic_cov, Z = beta_cov, Y = Y,
-    subject.ind = subject_ind, time.ind = time_ind, joint.test = joint.test, quad.n = quad_n
+    subject_ind = subject_ind, time_ind = time_ind, joint_test = joint_test, quad_n = quad_n
   )
 
   list(

@@ -38,11 +38,11 @@ cal_zibeta_loglik <- function(para,
 #' @param X FILL
 #' @param Z FILL
 #' @param Y FILL
-#' @param subject.ind the subject index
-#' @param time.ind the time index
-#' @param component.wise.test boolean to run component-wise test
-#' @param joint.test boolean to run joint test
-#' @param quad.n number of points in gaussian quadrature
+#' @param subject_ind the subject index
+#' @param time_ind the time index
+#' @param component_wise_test boolean to run component-wise test
+#' @param joint_test boolean to run joint test
+#' @param quad_n number of points in gaussian quadrature
 #' @param verbose a boolean to enable more output
 #' @return a named list
 #' \itemize{
@@ -58,10 +58,10 @@ cal_zibeta_loglik <- function(para,
 #' @importFrom stats nlminb pchisq
 #' @importFrom statmod gauss.quad
 fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
-                                                 subject.ind = subject.ind, time.ind = time.ind,
-                                                 component.wise.test = TRUE,
-                                                 joint.test = TRUE,
-                                                 quad.n = 30, verbose = FALSE) {
+                                                 subject_ind = subject_ind, time_ind = time_ind,
+                                                 component_wise_test = TRUE,
+                                                 joint_test = TRUE,
+                                                 quad_n = 30, verbose = FALSE) {
   X <- as.matrix(X)
   Z <- as.matrix(Z)
   Y <- as.matrix(Y)
@@ -74,35 +74,35 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
   X.aug <- cbind(intersept = 1, X)
   Z.aug <- cbind(intersept = 1, Z)
 
-  subject.n <- length(unique(subject.ind))
-  time.n <- length(unique(time.ind))
+  subject.n <- length(unique(subject_ind))
+  time.n <- length(unique(time_ind))
   prod.mat <- matrix(rep(c(rep(1, time.n), rep(0, subject.n * time.n)), subject.n)[1:(subject.n^2 * time.n)],
                      byrow = TRUE,
                      nrow = subject.n,
                      ncol = subject.n * time.n)
 
   #### generate quad points
-  gherm <- gauss.quad(quad.n, kind = "hermite")
+  gherm <- gauss.quad(quad_n, kind = "hermite")
   gh.weights <- matrix(rep(gherm$weights, subject.n), nrow = subject.n, byrow = TRUE)
   gh.nodes <- matrix(rep(gherm$nodes, subject.n * time.n),
     nrow = subject.n * time.n, byrow = TRUE
   )
 
   ###### estimate and test each parameter
-  if (component.wise.test) {
+  if (component_wise_test) {
     logistic.fit <- fit_logistic_random_effect(
       X = X, Y = Y,
-      subject.ind = subject.ind, time.ind = time.ind,
-      quad.n = quad.n, verbose = verbose
+      subject.ind = subject_ind, time.ind = time_ind,
+      quad.n = quad_n, verbose = verbose
     )
     beta.fit <- fit_beta_random_effect(
-      Z = Z, Y = Y, subject.ind = subject.ind, time.ind = time.ind,
-      quad.n = quad.n, verbose = verbose
+      Z = Z, Y = Y, subject.ind = subject_ind, time.ind = time_ind,
+      quad.n = quad_n, verbose = verbose
     )
   }
 
   ##### jointly test each variable in logistic and beta component
-  if (joint.test) {
+  if (joint_test) {
     ##### H1
     X.test.coeff.index <- rep(FALSE, ncol(X.aug))
     Z.test.coeff.index <- rep(FALSE, ncol(Z.aug))
@@ -122,7 +122,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
       Y = Y, X.aug = X.aug, Z.aug = Z.aug, time.n = time.n, subject.n = subject.n,
       prod.mat = prod.mat,
       gh.weights = gh.weights, gh.nodes = gh.nodes,
-      quad.n = quad.n,
+      quad.n = quad_n,
       control = list(trace = ifelse(verbose, 2, 0))
     )
     ###### H0:set corresponding regression coefficients to zero, excluding intercept
@@ -148,7 +148,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
         Y = Y, X.aug = X.aug, Z.aug = Z.aug, time.n = time.n, subject.n = subject.n,
         prod.mat = prod.mat,
         gh.weights = gh.weights, gh.nodes = gh.nodes,
-        quad.n = quad.n,
+        quad.n = quad_n,
         control = list(trace = ifelse(verbose, 2, 0))
       )
       likelihodd.ratio <- -2 * (-opt.H0$objective - (-opt.H1$objective))
@@ -167,14 +167,14 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
                         loglikelihood = NA,
                         joint.p = NA)
 
-  if (component.wise.test) {
+  if (component_wise_test) {
     return_values[["logistic.est.table"]] <- logistic.fit$est.table
     return_values[["logistic.s1.est"]] <- logistic.fit$s1.est
     return_values[["beta.est.table"]] <- beta.fit$est.table
     return_values[["beta.s2.est"]] <- beta.fit$s2.est
     return_values[["beta.v.est"]] <- beta.fit$v.est
   }
-  if (joint.test) {
+  if (joint_test) {
     return_values[["loglikelihood"]] <- -opt.H1$objective
     return_values[["joint.p"]] <- joint.p
   }

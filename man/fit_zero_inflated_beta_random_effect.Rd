@@ -9,11 +9,11 @@ fit_zero_inflated_beta_random_effect(
   X = X,
   Z = Z,
   Y = Y,
-  subject.ind = subject.ind,
-  time.ind = time.ind,
-  component.wise.test = TRUE,
-  joint.test = TRUE,
-  quad.n = 30,
+  subject_ind = subject_ind,
+  time_ind = time_ind,
+  component_wise_test = TRUE,
+  joint_test = TRUE,
+  quad_n = 30,
   verbose = FALSE
 )
 }
@@ -24,15 +24,15 @@ fit_zero_inflated_beta_random_effect(
 
 \item{Y}{FILL}
 
-\item{subject.ind}{the subject index}
+\item{subject_ind}{the subject index}
 
-\item{time.ind}{the time index}
+\item{time_ind}{the time index}
 
-\item{component.wise.test}{boolean to run component-wise test}
+\item{component_wise_test}{boolean to run component-wise test}
 
-\item{joint.test}{boolean to run joint test}
+\item{joint_test}{boolean to run joint test}
 
-\item{quad.n}{number of points in gaussian quadrature}
+\item{quad_n}{number of points in gaussian quadrature}
 
 \item{verbose}{a boolean to enable more output}
 }
