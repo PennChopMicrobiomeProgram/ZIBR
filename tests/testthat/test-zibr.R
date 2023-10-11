@@ -106,8 +106,8 @@ test_that("zibr main function works on simulated data", {
   zibr_fit <- zibr(logistic_cov = sim$X,
                    beta_cov = sim$Z,
                    Y = sim$Y,
-                   subject_ind = sim$subject.ind,
-                   time_ind = sim$time.ind)
+                   subject_ind = sim$subject_ind,
+                   time_ind = sim$time_ind)
 
   expect_equal(zibr_fit, sim_expected, tolerance = 1e-3)
 })
@@ -116,8 +116,8 @@ test_that("zibr main function works on simulated data with same covariates", {
   zibr_fit <- zibr(logistic_cov = sim$X,
                    beta_cov = sim$X,
                    Y = sim$Y,
-                   subject_ind = sim$subject.ind,
-                   time_ind = sim$time.ind)
+                   subject_ind = sim$subject_ind,
+                   time_ind = sim$time_ind)
 
   expect_equal(zibr_fit, sim_expected_cov, tolerance = 1e-3)
 })

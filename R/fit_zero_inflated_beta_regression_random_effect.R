@@ -1,5 +1,5 @@
-cal_zibeta_loglik <- function(para,
-                              subject.n, time.n,
+calc_zibeta_loglik <- function(para,
+                              subject_n, time_n,
                               X.aug, Z.aug, Y,
                               X.test.coeff.index,
                               Z.test.coeff.index,
@@ -9,21 +9,21 @@ cal_zibeta_loglik <- function(para,
   #### s1, s2, v will always be estimated
   logistic.para <- para[1:(sum(!X.test.coeff.index) + 1)] ## s1, alpha
   beta.para <- para[-(1:(sum(!X.test.coeff.index) + 1))] ## s2,v, beta
-  logistic.logLike <- cal_logistic_loglik(
+  logistic.logLike <- calc_logistic_loglik(
     para = logistic.para,
     X.aug = X.aug, Y = Y,
-    subject.n = subject.n,
-    time.n = time.n,
+    subject.n = subject_n,
+    time.n = time_n,
     prod.mat = prod.mat,
     X.test.coeff.index = X.test.coeff.index,
     gh.weights = gh.weights, gh.nodes = gh.nodes,
     quad.n = quad.n
   )
-  beta.logLike <- cal_beta_loglik(
+  beta.logLike <- calc_beta_loglik(
     para = beta.para,
     Z.aug = Z.aug, Y = Y,
-    subject.n = subject.n,
-    time.n = time.n,
+    subject.n = subject_n,
+    time.n = time_n,
     Z.test.coeff.index = Z.test.coeff.index,
     prod.mat = prod.mat,
     gh.weights = gh.weights, gh.nodes = gh.nodes,
@@ -111,7 +111,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
         c(1, rep(0, sum(!X.test.coeff.index))), ## s1,alpha
         c(1, 2, rep(0, sum(!Z.test.coeff.index)))
       ), ## s2,v,beta
-      objective = cal_zibeta_loglik,
+      objective = calc_zibeta_loglik,
       lower = c(
         c(0.00001, rep(-Inf, sum(!X.test.coeff.index))),
         c(0.00001, 0.00001, rep(-Inf, sum(!Z.test.coeff.index)))
@@ -119,7 +119,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
       upper = Inf,
       X.test.coeff.index = X.test.coeff.index,
       Z.test.coeff.index = Z.test.coeff.index,
-      Y = Y, X.aug = X.aug, Z.aug = Z.aug, time.n = time.n, subject.n = subject.n,
+      Y = Y, X.aug = X.aug, Z.aug = Z.aug, time_n = time.n, subject_n = subject.n,
       prod.mat = prod.mat,
       gh.weights = gh.weights, gh.nodes = gh.nodes,
       quad.n = quad_n,
@@ -137,7 +137,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
           c(1, rep(0, sum(!X.test.coeff.index))), ## s1,alpha
           c(1, 2, rep(0, sum(!Z.test.coeff.index)))
         ), ## s2,v,beta
-        objective = cal_zibeta_loglik,
+        objective = calc_zibeta_loglik,
         lower = c(
           c(0.00001, rep(-Inf, sum(!X.test.coeff.index))),
           c(0.00001, 0.00001, rep(-Inf, sum(!Z.test.coeff.index)))
@@ -145,7 +145,7 @@ fit_zero_inflated_beta_random_effect <- function(X = X, Z = Z, Y = Y,
         upper = Inf,
         X.test.coeff.index = X.test.coeff.index,
         Z.test.coeff.index = Z.test.coeff.index,
-        Y = Y, X.aug = X.aug, Z.aug = Z.aug, time.n = time.n, subject.n = subject.n,
+        Y = Y, X.aug = X.aug, Z.aug = Z.aug, time_n = time.n, subject_n = subject.n,
         prod.mat = prod.mat,
         gh.weights = gh.weights, gh.nodes = gh.nodes,
         quad.n = quad_n,

@@ -19,8 +19,8 @@
 #'   \item beta the coefficients in beta component
 #'   \item s1 the stardard deviation of random effect in logistic component
 #'   \item s2 the stardard deviation of random effect in beta component
-#'   \item subject.ind the IDs for each subject
-#'   \item time.ind time points
+#'   \item subject_ind the IDs for each subject
+#'   \item time_ind time points
 #' }
 #'
 #' @importFrom stats rnorm rbinom rbeta
@@ -121,7 +121,7 @@ simulate_zero_inflated_beta_random_effect_data <- function(subject_n = 50, time_
     beta = beta,
     s1 = s1,
     s2 = s2,
-    subject.ind = subject.ind,
-    time.ind = time.ind
+    subject_ind = subject.ind,
+    time_ind = time.ind
   )
 }

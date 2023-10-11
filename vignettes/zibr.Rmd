@@ -60,7 +60,7 @@ We can run the zibr function to fit the zero-inflated beta random effect model o
 ```{r}
 zibr_fit <- zibr(
   logistic_cov = sim$X, beta_cov = sim$Z, Y = sim$Y,
-  subject_ind = sim$subject.ind, time_ind = sim$time.ind
+  subject_ind = sim$subject_ind, time_ind = sim$time_ind
 )
 zibr_fit
 ```
@@ -70,7 +70,7 @@ If we use the same covariates for logistic and beta components, ZIBR can jointly
 ```{r}
 zibr_fit <- zibr(
   logistic_cov = sim$X, beta_cov = sim$X, Y = sim$Y,
-  subject_ind = sim$subject.ind, time_ind = sim$time.ind
+  subject_ind = sim$subject_ind, time_ind = sim$time_ind
 )
 zibr_fit
 ```

@@ -1,4 +1,4 @@
-cal_beta_loglik <- function(para, Z.aug, Y, subject.n, time.n,
+calc_beta_loglik <- function(para, Z.aug, Y, subject.n, time.n,
                             prod.mat = prod.mat,
                             Z.test.coeff.index,
                             gh.weights, gh.nodes, quad.n) {
@@ -96,7 +96,7 @@ fit_beta_random_effect <- function(Z = Z, Y = Y,
   Z.test.coeff.index <- rep(FALSE, ncol(Z.aug))
   opt.H1 <- nlminb(
     start = c(1, 2, rep(0, sum(!Z.test.coeff.index))), ## s2,v,alpha
-    objective = cal_beta_loglik,
+    objective = calc_beta_loglik,
     lower = c(
       0.00001, 0.00001,
       rep(-Inf, sum(!Z.test.coeff.index))
@@ -120,7 +120,7 @@ fit_beta_random_effect <- function(Z = Z, Y = Y,
     Z.test.coeff.index[test.i] <- TRUE
     opt.H0 <- nlminb(
       start = c(1, 2, rep(0, sum(!Z.test.coeff.index))), ## s2,alpha
-      objective = cal_beta_loglik,
+      objective = calc_beta_loglik,
       lower = c(
         0.00001, 0.00001,
         rep(-Inf, sum(!Z.test.coeff.index))

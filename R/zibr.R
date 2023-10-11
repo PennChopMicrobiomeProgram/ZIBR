@@ -37,7 +37,7 @@
 #' ## run zibr on the simulated data
 #' zibr_fit <- zibr(
 #'   logistic_cov = sim$X, beta_cov = sim$Z, Y = sim$Y,
-#'   subject_ind = sim$subject.ind, time_ind = sim$time.ind
+#'   subject_ind = sim$subject_ind, time_ind = sim$time_ind
 #' )
 #' zibr_fit
 #' }

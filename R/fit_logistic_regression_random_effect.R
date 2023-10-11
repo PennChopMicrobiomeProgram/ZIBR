@@ -1,4 +1,4 @@
-cal_logistic_loglik <- function(para, X.aug, Y, subject.n, time.n,
+calc_logistic_loglik <- function(para, X.aug, Y, subject.n, time.n,
                                 prod.mat,
                                 X.test.coeff.index,
                                 gh.weights, gh.nodes, quad.n) {
@@ -86,7 +86,7 @@ fit_logistic_random_effect <- function(X = X, Y = Y,
 
   opt.H1 <- nlminb(
     start = c(1, rep(0, sum(!X.test.coeff.index))), ## s1,alpha
-    objective = cal_logistic_loglik,
+    objective = calc_logistic_loglik,
     lower = c(
       0.00001,
       rep(-Inf, sum(!X.test.coeff.index))
@@ -109,7 +109,7 @@ fit_logistic_random_effect <- function(X = X, Y = Y,
     X.test.coeff.index[test.i] <- TRUE
     opt.H0 <- nlminb(
       start = c(1, rep(0, sum(!X.test.coeff.index))), ## s1,alpha
-      objective = cal_logistic_loglik,
+      objective = calc_logistic_loglik,
       lower = c(
         0.00001,
         rep(-Inf, sum(!X.test.coeff.index))
