@@ -80,7 +80,7 @@ fit_beta_random_effect <- function(Z = Z, Y = Y,
                      ncol = subject.n * time.n)
 
   #### generate quad points
-  gherm <- gauss.quad(quad_n, kind = "hermite")
+  gherm <- gauss.quad(quad.n, kind = "hermite")
   gh.weights <- matrix(rep(gherm$weights, subject.n), nrow = subject.n, byrow = TRUE)
   gh.nodes <- matrix(rep(gherm$nodes, subject.n * time.n),
     nrow = subject.n * time.n, byrow = TRUE
