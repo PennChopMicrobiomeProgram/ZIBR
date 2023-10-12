@@ -5,47 +5,45 @@
 \title{Fit zero-inflated beta regression with random effects}
 \usage{
 zibr(
-  logistic.cov = logistic.cov,
-  beta.cov = beta.cov,
-  Y = Y,
-  subject.ind = subject.ind,
-  time.ind = time.ind,
-  component.wise.test = TRUE,
-  quad.n = 30,
+  logistic_cov,
+  beta_cov,
+  Y,
+  subject_ind,
+  time_ind,
+  component_wise_test = TRUE,
+  quad_n = 30,
   verbose = FALSE
 )
 }
 \arguments{
-\item{logistic.cov}{the covariates in logistic component}
+\item{logistic_cov}{the covariates in logistic component}
 
-\item{beta.cov}{the covariates in beta component}
+\item{beta_cov}{the covariates in beta component}
 
 \item{Y}{the response variable in the regression model}
 
-\item{subject.ind}{the variable for subject IDs}
+\item{subject_ind}{the variable for subject IDs}
 
-\item{time.ind}{the variable for time points}
+\item{time_ind}{the variable for time points}
 
-\item{component.wise.test}{whether to perform component wise test. If true, ZIBR will calculate pvalues for logistic and beta component respectively.}
+\item{component_wise_test}{whether to perform component wise test.
+If true, ZIBR will calculate p-values for logistic and beta component respectively.}
 
-\item{quad.n}{Gaussian quadrature points}
+\item{quad_n}{Gaussian quadrature points}
 
 \item{verbose}{print the fitting process}
 }
 \value{
-logistic.est.table the estimated coefficients for logistic component.
-
-logistic.s1.est the estimated standard deviation for the random effect in the logistic component.
-
-beta.est.table the estimated coefficients for logistic component.
-
-beta.s2.est the estimated standard deviation for the random effect in the beta component.
-
-beta.v.est the estiamted dispersion parameter in the beta component.
-
-loglikelihood  the log likelihood of fitting zibr model on the data.
-
-joint.p  the pvalues for jointly testing each covariate in both logistic and beta component.
+a named list
+\itemize{
+  \item logistic_est_table - the estimated coefficients for logistic component.
+  \item logistic_s1_est - the estimated standard deviation for the random effect in the logistic component.
+  \item beta_est_table - the estimated coefficients for logistic component.
+  \item beta_s2_est - the estimated standard deviation for the random effect in the beta component.
+  \item beta_v_est - the estimated dispersion parameter in the beta component.
+  \item loglikelihood - the log likelihood of fitting ZIBR model on the data.
+  \item joint_p - the p-values for jointly testing each covariate in both logistic and beta component.
+}
 }
 \description{
 Fit zero-inflated beta regression with random effects
@@ -54,17 +52,20 @@ Fit zero-inflated beta regression with random effects
 \dontrun{
 ## simulate some data
 sim <- simulate_zero_inflated_beta_random_effect_data(
-subject.n=100,time.n=5,
-X = as.matrix(c(rep(0,50*5),rep(1,50*5))),
-Z = as.matrix(c(rep(0,50*5),rep(1,50*5))),
-alpha = as.matrix(c(-0.5,1)),
-beta = as.matrix(c(-0.5,0.5)),
-s1 = 1,s2 = 0.8,
-v = 5,
-sim.seed=100)
+  subject_n = 100, time_n = 5,
+  X = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
+  Z = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
+  alpha = as.matrix(c(-0.5, 1)),
+  beta = as.matrix(c(-0.5, 0.5)),
+  s1 = 1, s2 = 0.8,
+  v = 5,
+  sim_seed = 100
+)
 ## run zibr on the simulated data
-zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
-                 subject.ind = sim$subject.ind,time.ind = sim$time.ind)
-zibr.fit
+zibr_fit <- zibr(
+  logistic_cov = sim$X, beta_cov = sim$Z, Y = sim$Y,
+  subject_ind = sim$subject_ind, time_ind = sim$time_ind
+)
+zibr_fit
 }
 }

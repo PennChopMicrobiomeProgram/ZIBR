@@ -1,5 +1,3 @@
-
-
 generate_gaussian_quad_points = function(quad.n = 30) {
   ## library(statmod)
   ## gherm <- gauss.quad(100, kind = "hermite")
@@ -151,6 +149,3 @@ generate_gaussian_quad_points = function(quad.n = 30) {
   }
   return(gherm)
 }
-
-
-

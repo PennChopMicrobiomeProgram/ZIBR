@@ -1,78 +1,89 @@
 #' Fit zero-inflated beta regression with random effects
 #'
-#' @param logistic.cov the covariates in logistic component
-#' @param beta.cov the covariates in beta component
+#' @param logistic_cov the covariates in logistic component
+#' @param beta_cov the covariates in beta component
 #' @param Y the response variable in the regression model
-#' @param subject.ind the variable for subject IDs
-#' @param time.ind the variable for time points
-#' @param component.wise.test whether to perform component wise test. If true, ZIBR will calculate pvalues for logistic and beta component respectively.
-#' @param quad.n Gaussian quadrature points
+#' @param subject_ind the variable for subject IDs
+#' @param time_ind the variable for time points
+#' @param component_wise_test whether to perform component wise test.
+#'   If true, ZIBR will calculate p-values for logistic and beta component respectively.
+#' @param quad_n Gaussian quadrature points
 #' @param verbose print the fitting process
-#' @return logistic.est.table the estimated coefficients for logistic component.
-#' @return logistic.s1.est the estimated standard deviation for the random effect in the logistic component.
-#' @return beta.est.table the estimated coefficients for logistic component.
-#' @return beta.s2.est the estimated standard deviation for the random effect in the beta component.
-#' @return beta.v.est the estiamted dispersion parameter in the beta component.
-#' @return loglikelihood  the log likelihood of fitting zibr model on the data.
-#' @return joint.p  the pvalues for jointly testing each covariate in both logistic and beta component.
+#' @return a named list
+#' \itemize{
+#'   \item logistic_est_table - the estimated coefficients for logistic component.
+#'   \item logistic_s1_est - the estimated standard deviation for the random effect in the logistic component.
+#'   \item beta_est_table - the estimated coefficients for logistic component.
+#'   \item beta_s2_est - the estimated standard deviation for the random effect in the beta component.
+#'   \item beta_v_est - the estimated dispersion parameter in the beta component.
+#'   \item loglikelihood - the log likelihood of fitting ZIBR model on the data.
+#'   \item joint_p - the p-values for jointly testing each covariate in both logistic and beta component.
+#' }
+#'
 #' @export
 #' @examples
 #' \dontrun{
 #' ## simulate some data
 #' sim <- simulate_zero_inflated_beta_random_effect_data(
-#' subject.n=100,time.n=5,
-#' X = as.matrix(c(rep(0,50*5),rep(1,50*5))),
-#' Z = as.matrix(c(rep(0,50*5),rep(1,50*5))),
-#' alpha = as.matrix(c(-0.5,1)),
-#' beta = as.matrix(c(-0.5,0.5)),
-#' s1 = 1,s2 = 0.8,
-#' v = 5,
-#' sim.seed=100)
+#'   subject_n = 100, time_n = 5,
+#'   X = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
+#'   Z = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
+#'   alpha = as.matrix(c(-0.5, 1)),
+#'   beta = as.matrix(c(-0.5, 0.5)),
+#'   s1 = 1, s2 = 0.8,
+#'   v = 5,
+#'   sim_seed = 100
+#' )
 #' ## run zibr on the simulated data
-#' zibr.fit <- zibr(logistic.cov = sim$X, beta.cov = sim$Z, Y = sim$Y,
-#'                  subject.ind = sim$subject.ind,time.ind = sim$time.ind)
-#' zibr.fit
+#' zibr_fit <- zibr(
+#'   logistic_cov = sim$X, beta_cov = sim$Z, Y = sim$Y,
+#'   subject_ind = sim$subject_ind, time_ind = sim$time_ind
+#' )
+#' zibr_fit
 #' }
-
-
-
-
-zibr = function(logistic.cov=logistic.cov,
-                 beta.cov=beta.cov,
-                 Y=Y,
-                 subject.ind=subject.ind,
-                 time.ind=time.ind,
-                 component.wise.test=TRUE,
-                 quad.n=30,verbose=FALSE){
+zibr <- function(logistic_cov,
+                 beta_cov,
+                 Y,
+                 subject_ind,
+                 time_ind,
+                 component_wise_test = TRUE,
+                 quad_n = 30,
+                 verbose = FALSE) {
   Y <- as.matrix(Y)
   #### check if Y is in [0,1)
-  if(min(Y)<0 | max(Y)>=1){
+  if (min(Y) < 0 || max(Y) >= 1) {
     stop("The response variable should be in [0,1)")
   }
   #### check the dimentions of X,Z,Y
-  if(nrow(logistic.cov) != nrow(Y) | nrow(beta.cov) != nrow(Y) ){
+  if (nrow(logistic_cov) != nrow(Y) || nrow(beta_cov) != nrow(Y)) {
     stop("The dimensions of covariates and repsonse variable are not correct")
   }
   #### check how many zeros in Y
-  if(sum(Y>0)/length(Y)>0.9){warning("Too few zeros in the abundance data. The logistic component may be not accurate.")}
-  if(sum(Y>0)/length(Y)<0.1){warning("Too many zeros in the abundance data. The beta component may be not accurate.")}
+  if (sum(Y > 0) / length(Y) > 0.9) {
+    warning("Too few zeros in the abundance data. The logistic component may be not accurate.")
+  }
+  if (sum(Y > 0) / length(Y) < 0.1) {
+    warning("Too many zeros in the abundance data. The beta component may be not accurate.")
+  }
   #### if the colnames are the same, jointly test the two component
-  if (identical(colnames(logistic.cov),colnames(beta.cov))){
-    joint.test <- TRUE
+  if (identical(colnames(logistic_cov), colnames(beta_cov))) {
+    joint_test <- TRUE
+  } else {
+    joint_test <- FALSE
   }
-  else{
-    joint.test <- FALSE
-  }
-  #### check if time.ind are the same for each subject.ind
-  fit = fit_zero_inflated_beta_random_effect(X=logistic.cov,Z=beta.cov,Y=Y,
- subject.ind=subject.ind,time.ind=time.ind,joint.test=joint.test)
+  #### check if time_ind are the same for each subject_ind
+  fit <- fit_zero_inflated_beta_random_effect(
+    X = logistic_cov, Z = beta_cov, Y = Y,
+    subject_ind = subject_ind, time_ind = time_ind, joint_test = joint_test, quad_n = quad_n
+  )
 
-  return(list(logistic.est.table=fit$logistic.est.table,
-              logistic.s1.est=fit$logistic.s1.est,
-              beta.est.table=fit$beta.est.table,
-              beta.s2.est=fit$beta.s2.est,
-              beta.v.est=fit$beta.v.est,
-              loglikelihood = fit$loglikelihood,
-              joint.p=fit$joint.p))
-
+  list(
+    logistic_est_table = fit$logistic_est_table,
+    logistic_s1_est = fit$logistic_s1_est,
+    beta_est_table = fit$beta_est_table,
+    beta_s2_est = fit$beta_s2_est,
+    beta_v_est = fit$beta_v_est,
+    loglikelihood = fit$loglikelihood,
+    joint_p = fit$joint_p
+  )
 }
