@@ -45,6 +45,7 @@ calc_logistic_loglik <- function(para, X.aug, Y, subject.n, time.n,
 #' }
 #'
 #' @importFrom stats nlminb pchisq
+#' @importFrom statmod gauss.quad
 fit_logistic_random_effect <- function(X = X, Y = Y,
                                        subject.ind = subject.ind, time.ind = time.ind,
                                        quad.n = 30, verbose = FALSE) {
@@ -68,7 +69,7 @@ fit_logistic_random_effect <- function(X = X, Y = Y,
                      ncol = subject.n * time.n)
 
   #### generate quad points
-  gherm <- generate_gaussian_quad_points(quad.n)
+  gherm <- gauss.quad(quad_n, kind = "hermite")
   gh.weights <- matrix(rep(gherm$weights, subject.n), nrow = subject.n, byrow = TRUE)
   gh.nodes <- matrix(rep(gherm$nodes, subject.n * time.n),
     nrow = subject.n * time.n, byrow = TRUE
