@@ -20,7 +20,14 @@ Accordingly, we can test three biologically relevant null hypotheses:
 - H0: α_j = 0 and β_j = 0 for each covariate X_j and Z_j. This is to joinly test the coefficients in both logistic and Beta components, if the covariates affect the taxon both in terms of presence/absence and its non-zero abundance.  
 
 ## Installation
-You can install our ZIBR package from Github
+You can install our ZIBR package from CRAN
+
+```r
+install.packages("ZIBR")
+```
+
+Or get the dev version from GitHub
+
 ```r
 #install.packages("devtools")
 devtools::install_github("PennChopMicrobiomeProgram/ZIBR")

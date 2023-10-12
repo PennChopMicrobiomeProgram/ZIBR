@@ -22,7 +22,6 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
 #' ## simulate some data
 #' sim <- simulate_zero_inflated_beta_random_effect_data(
 #'   subject_n = 100, time_n = 5,
@@ -34,13 +33,14 @@
 #'   v = 5,
 #'   sim_seed = 100
 #' )
+#'
 #' ## run zibr on the simulated data
 #' zibr_fit <- zibr(
 #'   logistic_cov = sim$X, beta_cov = sim$Z, Y = sim$Y,
 #'   subject_ind = sim$subject_ind, time_ind = sim$time_ind
 #' )
+#'
 #' zibr_fit
-#' }
 zibr <- function(logistic_cov,
                  beta_cov,
                  Y,

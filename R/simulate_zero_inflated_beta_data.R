@@ -26,7 +26,6 @@
 #' @importFrom stats rnorm rbinom rbeta
 #' @export
 #' @examples
-#' \dontrun{
 #' simulate_zero_inflated_beta_random_effect_data(
 #'   subject_n = 100, time_n = 5,
 #'   X = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
@@ -36,7 +35,6 @@
 #'   v = 5,
 #'   sim_seed = 100
 #' )
-#' }
 simulate_zero_inflated_beta_random_effect_data <- function(subject_n = 50, time_n = 5, v = 2,
                                                            alpha = as.matrix(c(0, 0.5, -1)),
                                                            beta = as.matrix(c(-0.5, -0.5, 0.5)),

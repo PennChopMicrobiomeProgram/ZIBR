@@ -56,7 +56,6 @@ a named list
 Simulate data according to zero-inflated beta random effects model
 }
 \examples{
-\dontrun{
 simulate_zero_inflated_beta_random_effect_data(
   subject_n = 100, time_n = 5,
   X = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
@@ -66,5 +65,4 @@ simulate_zero_inflated_beta_random_effect_data(
   v = 5,
   sim_seed = 100
 )
-}
 }
