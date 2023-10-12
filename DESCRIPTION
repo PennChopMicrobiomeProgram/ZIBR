@@ -3,10 +3,11 @@ Type: Package
 Title: A zero-inflated beta random effect model
 Version: 0.1
 Date: 2017-01-25
-Authors@R: c(person("Eric", "Zhang Chen", email = "chvlyl@gmail.com", role = c("aut")),
+Authors@R: c(person("Eric", "Zhang Chen", email = "chvlyl@gmail.com", role = c("aut", "cph")),
              person("Charlie", "Bushman", email = "ctbushman@gmail.com", role = c("cre")))
-Description: A zero-inflated beta random effect model for longitudinal
-    microbiome data.
+Description: a two-part zero-inflated Beta regression model with random 
+    effects (ZIBR) for testing the association between microbial abundance 
+    and clinical covariates for longitudinal microbiome data.
 License: file LICENSE
 LazyData: TRUE
 RoxygenNote: 7.2.3
