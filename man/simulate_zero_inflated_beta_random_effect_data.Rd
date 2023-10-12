@@ -48,8 +48,8 @@ a named list
   \item beta the coefficients in beta component
   \item s1 the stardard deviation of random effect in logistic component
   \item s2 the stardard deviation of random effect in beta component
-  \item subject.ind the IDs for each subject
-  \item time.ind time points
+  \item subject_ind the IDs for each subject
+  \item time_ind time points
 }
 }
 \description{
