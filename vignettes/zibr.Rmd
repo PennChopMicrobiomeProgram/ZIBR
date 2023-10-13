@@ -101,7 +101,7 @@ zibr_fit
 
 Neither of the logsitic or beta component show significant pvalues. This indicates the abundance of this genus is not different between the two treatments, considering all time points.
 
-## Real Data (from [paper](http://bioinformatics.oxfordjournals.org/content/early/2016/05/14/bioinformatics.btw308.short?rss=1))
+## Real Data (from [paper](https://academic.oup.com/bioinformatics/article-abstract/32/17/2611/2450750?rss=1))
 
 This follows the analysis from the paper.
 
