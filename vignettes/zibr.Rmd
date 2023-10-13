@@ -77,7 +77,7 @@ zibr_fit
 
 ## Real Data
 
-Let's try anohter example on the real data. I will use a dataset from a longitudinal human microbiome study containing the bacterial abundance and clinical information from [Lewis and Chen et al.](http://www.cell.com/cell-host-microbe/references/S1931-3128(15)00377-7). I only include the abundance from one genus.  
+Let's try anohter example on the real data. I will use a dataset from a longitudinal human microbiome study containing the bacterial abundance and clinical information from [Lewis and Chen et al.](https://doi.org/10.1016/j.chom.2015.09.008). I only include the abundance from one genus.  
 
 ```{r}
 head(ibd, n = 20)
