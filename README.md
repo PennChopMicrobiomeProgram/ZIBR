@@ -3,7 +3,7 @@
 <!-- badges: start -->
   [![R-CMD-check](https://github.com/PennChopMicrobiomeProgram/ZIBR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PennChopMicrobiomeProgram/ZIBR/actions/workflows/R-CMD-check.yaml)
   [![codecov](https://codecov.io/gh/PennChopMicrobiomeProgram/ZIBR/graph/badge.svg?token=6A7MIF2IPE)](https://codecov.io/gh/PennChopMicrobiomeProgram/ZIBR)
-  [![Published in Bioinformatics](https://img.shields.io/badge/Published%20in-Bioinformatics-blue)](http://bioinformatics.oxfordjournals.org/content/early/2016/05/14/bioinformatics.btw308.short?rss=1)
+  [![Published in Bioinformatics](https://img.shields.io/badge/Published%20in-Bioinformatics-blue)](https://academic.oup.com/bioinformatics/article-abstract/32/17/2611/2450750?rss=1)
   <!-- badges: end -->
 
 ## Introduction
@@ -20,7 +20,14 @@ Accordingly, we can test three biologically relevant null hypotheses:
 - H0: α_j = 0 and β_j = 0 for each covariate X_j and Z_j. This is to joinly test the coefficients in both logistic and Beta components, if the covariates affect the taxon both in terms of presence/absence and its non-zero abundance.  
 
 ## Installation
-You can install our ZIBR package from Github
+You can install our ZIBR package from CRAN
+
+```r
+install.packages("ZIBR")
+```
+
+Or get the dev version from GitHub
+
 ```r
 #install.packages("devtools")
 devtools::install_github("PennChopMicrobiomeProgram/ZIBR")
@@ -68,7 +75,7 @@ After the missing values are imputed, the data can be fed into ZIBR.
 If you have other problems with the package or features/fixes to suggest, please open an issue on the [GitHub issues page](https://github.com/PennChopMicrobiomeProgram/ZIBR/issues).
 
 ## Citation
-Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing longitudinal microbiome data. Bioinformatics. [Link](http://bioinformatics.oxfordjournals.org/content/early/2016/05/14/bioinformatics.btw308.short?rss=1)
+Eric Z. Chen and Hongzhe Li (2016). A two-part mixed effect model for analyzing longitudinal microbiome data. Bioinformatics. [Link](https://academic.oup.com/bioinformatics/article-abstract/32/17/2611/2450750?rss=1)
 
 ## Contact
 Maintained by Charlie Bushman (ctbushman\@gmail.com) and the Penn CHOP Microbiome Program.
