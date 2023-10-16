@@ -1,8 +1,8 @@
 Package: ZIBR
 Type: Package
 Title: A Zero-Inflated Beta Random Effect Model
-Version: 1.0.1
-Date: 2023-10-12
+Version: 1.0.2
+Date: 2023-10-16
 Authors@R: c(person("Eric", "Zhang Chen", email = "chvlyl@gmail.com", role = c("aut", "cph")),
              person("Charlie", "Bushman", email = "ctbushman@gmail.com", role = c("cre")))
 Description: A two-part zero-inflated Beta regression model with random 
