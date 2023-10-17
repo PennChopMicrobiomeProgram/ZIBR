@@ -3,6 +3,7 @@
 <!-- badges: start -->
   [![R-CMD-check](https://github.com/PennChopMicrobiomeProgram/ZIBR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PennChopMicrobiomeProgram/ZIBR/actions/workflows/R-CMD-check.yaml)
   [![codecov](https://codecov.io/gh/PennChopMicrobiomeProgram/ZIBR/graph/badge.svg?token=6A7MIF2IPE)]( https://app.codecov.io/gh/PennChopMicrobiomeProgram/ZIBR)
+  [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/ZIBR)](https://cran.r-project.org/package=ZIBR)
   [![Published in Bioinformatics](https://img.shields.io/badge/Published%20in-Bioinformatics-blue)](https://academic.oup.com/bioinformatics/article-abstract/32/17/2611/2450750?rss=1)
   <!-- badges: end -->
 
