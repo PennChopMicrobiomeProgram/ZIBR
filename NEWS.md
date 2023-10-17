@@ -1,3 +1,5 @@
+# ZIBR (development version)
+
 # ZIBR 1.0.2
 
 * Fix license file inclusion
