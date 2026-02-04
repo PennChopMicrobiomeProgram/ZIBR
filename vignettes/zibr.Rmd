@@ -247,14 +247,14 @@ for (spe in spe.all) {
 #### adjust p values
 p.species.zibr <- t(as.data.frame(p.species.list.zibr))
 p.species.zibr.adj <-
-  rownames_to_column(as.data.frame(p.species.zibr), var = "Species") %>% mutate_each(funs(p.adjust(., "fdr")), -Species)
+  rownames_to_column(as.data.frame(p.species.zibr), var = "Species") %>% mutate(across(-Species, ~p.adjust(., "fdr")))
 
 # write.csv(p.species.zibr.adj,file=paste('4_Results/Real_Data_Estimation_Results_antiTNF_EEN_ZIBR.csv',sep=''))
 
 
 p.species.lme <- t(as.data.frame(p.species.list.lme))
 p.species.lme.adj <-
-  rownames_to_column(as.data.frame(p.species.lme), var = "Species") %>% mutate_each(funs(p.adjust(., "fdr")), -Species)
+  rownames_to_column(as.data.frame(p.species.lme), var = "Species") %>% mutate(across(-Species, ~p.adjust(., "fdr")))
 
 # write.csv(p.species.lme.adj,file=paste('4_Results/Real_Data_Estimation_Results_antiTNF_EEN_LME.csv',sep=''))
 
