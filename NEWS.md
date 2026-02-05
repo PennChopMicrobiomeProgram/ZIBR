@@ -1,5 +1,9 @@
 # ZIBR (development version)
 
+# ZIBR 1.0.3
+
+* Update deprecated (and removed) dplyr references
+
 # ZIBR 1.0.2
 
 * Fix license file inclusion
