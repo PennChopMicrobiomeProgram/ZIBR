@@ -1,9 +1,9 @@
 expected_bre_fit <- list(
-  est.table = structure(
+  est.table = matrix(
     c(-0.60955243747617, -0.443501946207444, 0.736943004541776,
       0.0104576873063189, 0.000414042620671129, 0.0123799088684966),
-    .Dim = 3:2,
-    .Dimnames = list(
+    nrow = 3,
+    dimnames = list(
       c("intersept", "log.Time", "Treatment"),
       c("Estimate", "Pvalue")
     )
@@ -25,11 +25,11 @@ test_that("simulate_beta_data works", {
 })
 
 expected_lre_fit <- list(
-  est.table = structure(
+  est.table = matrix(
     c(0.306795205483351, 0.280454254105502,
       -0.667159092633291, 0.431194361789462, 0.266160176079596, 0.123214729652536),
-    .Dim = 3:2,
-    .Dimnames = list(c("intersept", "log.Time", "Treatment"), c("Estimate", "Pvalue"))
+    nrow = 3,
+    dimnames = list(c("intersept", "log.Time", "Treatment"), c("Estimate", "Pvalue"))
   ),
   s1.est = 1.12114408844058
 )
