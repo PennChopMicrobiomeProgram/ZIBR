@@ -49,7 +49,5 @@ test_that("simulate_logistic_data works", {
                                     Y = logistic_data$Y,
                                     subject.ind = logistic_data$subject_ind,
                                     time.ind = logistic_data$time_ind)
-  dput(res)
-
   expect_equal(res, expected_lre_fit, tolerance = 1e-3)
 })
